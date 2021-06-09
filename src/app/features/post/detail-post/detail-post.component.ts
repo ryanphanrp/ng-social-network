@@ -4,9 +4,8 @@ import {IComment, IPost, IUser, slideAnimation} from '@shared/models';
 import {UserService} from '@core/_services/user.service';
 import {PostService} from '@core/_services/post.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {CommentComponent} from '@shared/components/comment/comment.component';
-import {CarouselComponent} from '@shared/components/carousel/carousel.component';
 import {NewPostService} from '@features/post/new-post.service';
+import {CarouselComponent, CommentComponent} from '../utils';
 
 @Component({
   selector: 'app-detail-post',
@@ -56,42 +55,6 @@ export class DetailPostComponent implements OnInit {
     });
   }
 
-
-  // Like Post
-  likeThisPost(): void {
-    this.isLiked = !this.isLiked;
-    this.postSr.likePost(this.data?._id).subscribe(
-      (_: any) => {
-        this.data.likes?.push(this.curUser._id);
-        this.cdRef.markForCheck();
-      }
-    );
-  }
-
-  // Unlike Post
-  unlikeThisPost(): void {
-    this.isLiked = !this.isLiked;
-    this.postSr.unlikePost(this.data?._id).subscribe(
-      (_: any) => {
-        this.data.likes = this.data?.likes?.filter(ele => ele !== this.curUser?._id);
-        this.cdRef.markForCheck();
-      }
-    );
-  }
-
-  /*
-    View User Like Post
-  */
-  viewUsersLike(): void {
-    this.newPost.viewUsersLikePost(this.data._id).subscribe(
-      (res: any) => {
-        if (res) {
-          this.ngOnInit();
-        }
-      }
-    );
-  }
-
   // Update post comments
   updateComments(event: IComment): void {
     this.data.comments?.push(event);
@@ -113,7 +76,7 @@ export class DetailPostComponent implements OnInit {
 
   deletePost(): void {
     this.postSr.deletePost(this.data?._id).subscribe(
-      (next: any) => {
+      (_: any) => {
         console.log('this post has been deleted.');
         this.dialogRef.close(true);
       }

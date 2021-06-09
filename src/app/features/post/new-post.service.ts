@@ -5,7 +5,6 @@ import {NewPostComponent} from '@features/post/new-post/new-post.component';
 import {PostService} from '@core/_services/post.service';
 import {Observable, of} from 'rxjs';
 import {EditPostComponent} from '@features/post/edit-post/edit-post.component';
-import {map} from 'rxjs/operators';
 import {UserService} from '@core/_services';
 
 @Injectable({
@@ -31,7 +30,7 @@ export class NewPostService {
       panelClass: 'new-post-dialog',
     });
 
-    dialogRef.backdropClick().subscribe(next => {
+    dialogRef.backdropClick().subscribe((_: any) => {
       this.dialogSr.openConfirmDialog('Close', 'Do you want to close this dialog?').afterClosed().subscribe(
         (cfm: any) => {
           if (cfm) {
@@ -60,7 +59,7 @@ export class NewPostService {
       panelClass: 'edit-post-dialog',
     });
 
-    dialogRef.backdropClick().subscribe((next: any) => {
+    dialogRef.backdropClick().subscribe((__: any) => {
       this.dialogSr.openConfirmDialog('Close', 'Do you want to close this dialog?').afterClosed().subscribe(
         (cfm: any) => {
           if (cfm) {
@@ -75,20 +74,5 @@ export class NewPostService {
       );
     });
     return dialogRef.afterClosed();
-  }
-
-  /*
-    Dialog view users like post
-  */
-  viewUsersLikePost(ID: string): Observable<boolean> {
-    return this.dialogSr.openInfoDialog('Likes', this.postSr.getUsersLikePost(ID)).pipe(
-      map((el: any) => {
-        if (el) {
-          this.userSr.updateNewUser();
-          return true;
-        }
-        return false;
-      })
-    );
   }
 }

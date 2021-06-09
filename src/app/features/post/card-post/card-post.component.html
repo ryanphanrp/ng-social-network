@@ -55,22 +55,8 @@
 
   <div class="footer-card">
 
-    <!-- Like-->
-    <div class="liked-group">
-      <div *ngIf="!isLiked; else disLike">
-        <button (click)="likeThisPost()" class="btn-like">
-          <app-svg-icon [name]="'heart-outline'"></app-svg-icon>
-        </button>
-      </div>
-      <ng-template #disLike>
-        <div>
-          <button (click)="unlikeThisPost()" class="btn-like">
-            <app-svg-icon [name]="'heart-fill'"></app-svg-icon>
-          </button>
-        </div>
-      </ng-template>
-      <div [innerHTML]="data.likes | countedLikes" (click)="viewUsersLike()" class="liked-list">vl</div>
-    </div>
+    <!-- Likes -->
+    <app-likes [Likes]="data.likes" [postID]="data._id"></app-likes>
 
     <!-- Comment-->
     <div class="comments-group">

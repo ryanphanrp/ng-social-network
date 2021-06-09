@@ -1,12 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CardPostComponent } from './card-post/card-post.component';
-import { ListPostComponent } from './list-post/list-post.component';
-import { DetailPostComponent } from './detail-post/detail-post.component';
-import { NewPostComponent } from './new-post/new-post.component';
-import { EditPostComponent } from './edit-post/edit-post.component';
-import { UploadImageComponent } from './upload-image/upload-image.component';
-import { HashtagChipComponent } from './hashtag-chip/hashtag-chip.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {CardPostComponent} from './card-post/card-post.component';
+import {ListPostComponent} from './list-post/list-post.component';
+import {DetailPostComponent} from './detail-post/detail-post.component';
+import {NewPostComponent} from './new-post/new-post.component';
+import {EditPostComponent} from './edit-post/edit-post.component';
 import {SharedModule} from '@shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
@@ -20,6 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {CarouselComponent, CommentComponent, HashtagChipComponent, LikesComponent, UploadImageComponent} from '@features/post/utils';
 
 const materialModules = [
   MatChipsModule,
@@ -33,19 +32,22 @@ const materialModules = [
   MatSnackBarModule
 ];
 
+const utilComponents = [
+  UploadImageComponent,
+  HashtagChipComponent,
+  LikesComponent,
+  CarouselComponent,
+  CommentComponent
+];
+
 @NgModule({
-    declarations: [
-        CardPostComponent,
-        ListPostComponent,
-        DetailPostComponent,
-        NewPostComponent,
-        EditPostComponent,
-        UploadImageComponent,
-        HashtagChipComponent
-    ],
-  exports: [
+  declarations: [
     CardPostComponent,
-    ListPostComponent
+    ListPostComponent,
+    DetailPostComponent,
+    NewPostComponent,
+    EditPostComponent,
+    utilComponents
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,11 @@ const materialModules = [
     ImageCropperModule,
     FormsModule,
     materialModules
+  ],
+  exports: [
+    CardPostComponent,
+    ListPostComponent
   ]
 })
-export class PostModule { }
+export class PostModule {
+}
