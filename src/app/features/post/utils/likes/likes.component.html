@@ -1,0 +1,16 @@
+<!-- Like-->
+<div class="likes-container">
+  <div *ngIf="!isLiked; else disLike">
+    <button (click)="likeThisPost()" class="btn-like">
+      <app-svg-icon [name]="'heart-outline'"></app-svg-icon>
+    </button>
+  </div>
+  <ng-template #disLike>
+    <div>
+      <button (click)="unlikeThisPost()" class="btn-like">
+        <app-svg-icon [name]="'heart-fill'"></app-svg-icon>
+      </button>
+    </div>
+  </ng-template>
+  <div [innerHTML]="Likes | countedLikes" (click)="viewUsersLikePost()" class="liked-list"></div>
+</div>
