@@ -3,12 +3,19 @@
   <!--  Header of Conversation-->
   <div class="header">
     <div class="avatar-block">
-      <img alt="" class="avatar" src="https://i.imgur.com/fkmgb1n.jpg">
+      <img alt="" class="avatar" src="{{ partner?.avatarUrl }}">
       <div class="status"></div>
     </div>
     <div class="name-block">
-      <div class="name">My Friend</div>
+      <div class="name">{{ partner?.name }}</div>
       <div class="active">Active now</div>
+    </div>
+
+    <!--Options-->
+    <div class="options">
+      <button class="btn-delete" (click)="deleteConversation()">
+        <app-svg-icon [name]="'delete'"></app-svg-icon>
+      </button>
     </div>
   </div>
 
