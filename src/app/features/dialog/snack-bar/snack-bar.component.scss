@@ -1,0 +1,93 @@
+::ng-deep .mat-snack-bar-container {
+  padding: 0 0;
+  border-radius: 5px;
+  background: white;
+
+  div {
+    height: 100%;
+
+    .snack-bar-container {
+      padding: 8px 12px;
+      margin: 0 0;
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .icon {
+        margin-right: 10px;
+      }
+
+      .message {
+        color: #374151;
+        font-size: 16px;
+        block-size: fit-content;
+      }
+    }
+  }
+}
+
+
+.svg-container {
+  animation: fadeIcon 0.3s forwards;
+
+  svg {
+    circle {
+
+      background: crimson;
+    }
+
+    path {
+      animation: fadeIcon 0.3s forwards;
+    }
+
+  }
+}
+
+@keyframes fadeIcon {
+  from {
+    display: none;
+  }
+
+  to {
+    display: block;
+  }
+}
+
+/**
+Loading
+*/
+$spinnerSize: 28;
+svg.spinner {
+  width: $spinnerSize + px;
+  height: $spinnerSize + px;
+  x: 0px;
+  y: 0px;
+  viewBox: 0 0 $spinnerSize $spinnerSize;
+
+  circle {
+    fill: transparent;
+    stroke: #2c3e50;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: (3.14 * $spinnerSize);
+    transform-origin: (0.5px * $spinnerSize) (0.5px * $spinnerSize) 0;
+    animation: spinner 2s linear infinite;
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+    stroke-dashoffset: (0.66 * $spinnerSize);
+  }
+  50% {
+    transform: rotate(720deg);
+    stroke-dashoffset: (3.14 * $spinnerSize);
+  }
+  100% {
+    transform: rotate(1080deg);
+    stroke-dashoffset: (0.66 * $spinnerSize);
+  }
+}
+

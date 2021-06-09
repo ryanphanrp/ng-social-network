@@ -1,0 +1,50 @@
+<div class="home-sider-container">
+
+  <!--  Current User's Information-->
+  <div class="top-home-sider h-3/5">
+    <app-brand></app-brand>
+    <app-info-user></app-info-user>
+  </div>
+
+  <!--  Menu Navigation-->
+  <div class="bottom-home-sider h-2/5">
+    <div class="menu">
+
+      <!--      Home Navigation-->
+      <div class="menu-child" [routerLink]="['./']" routerLinkActive='home'>
+        <app-svg-icon [name]="'home'"></app-svg-icon>
+        <span>Home</span>
+      </div>
+
+      <!--      Chat Navigation-->
+      <div class="menu-child" [routerLink]="['../chat']" routerLinkActive='home'>
+        <app-svg-icon [name]="'messenger'"></app-svg-icon>
+        <span>Chat</span>
+      </div>
+
+      <!--      Dialog Notifications-->
+      <div class="menu-child">
+        <app-svg-icon [name]="'notification'"></app-svg-icon>
+        <span>Notification</span>
+      </div>
+
+      <!--  Settings Menu-->
+      <div class="menu-child settings" [matMenuTriggerFor]="menu">
+        <app-svg-icon [name]="'setting'"></app-svg-icon>
+        <span>Settings</span>
+
+        <!--  Material Menu Dropdown-->
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="updateProfile()">
+            <img class="mr-4" src="https://img.icons8.com/material/24/000000/admin-settings-male.png" alt=""/>
+            <span>Profile Setting</span>
+          </button>
+          <button class="logout-btn" (click)="logOut()" mat-menu-item>
+            <mat-icon aria-hidden="false" aria-label="Logout icon">logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</div>

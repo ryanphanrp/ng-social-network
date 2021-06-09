@@ -1,0 +1,68 @@
+@import "mixins";
+
+.sign-container {
+  @apply h-full w-full flex justify-center items-center relative;
+
+  /* Direction */
+  .direct-option {
+    @apply self-start place-self-start right-0 top-0 z-10 absolute p-4;
+    @apply flex;
+
+    .sub-text {
+      @apply text-base text-blue-500
+    }
+
+    .dir-signup {
+      @apply text-blue-900 font-semibold text-base tracking-wider cursor-pointer;
+      @apply ml-2;
+    }
+  }
+
+  /* Sign up block */
+  .signup-block {
+    @apply w-2/5 p-4;
+    @include alignVertical;
+    border-radius: 20px;
+
+    .top-block {
+      @include alignVertical;
+      @apply my-4;
+
+      .title-form {
+        @apply text-2xl mt-4 font-semibold tracking-wider;
+      }
+    }
+
+    /* Form */
+    .signup-form {
+      @apply w-4/5;
+
+      .form-field {
+        @apply w-full h-2/5;
+        @include validationFormField;
+
+        &-ml2 {
+          @apply ml-2;
+        }
+
+        &-mr-2 {
+          @apply mr-2;
+        }
+      }
+
+      .field-form-inline {
+        display: flex;
+      }
+
+      .actions-block {
+        @include alignCenter();
+
+        // Button Submit
+        .btn-submit {
+          @apply w-full;
+          @include submitBtn;
+        }
+      }
+    }
+  }
+}

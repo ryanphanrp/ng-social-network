@@ -1,0 +1,16 @@
+<mat-form-field class="example-chip-list" *ngIf="!!hashtags">
+  <mat-label></mat-label>
+  <mat-chip-list #chipList aria-label="Hashtag selection">
+    <mat-chip (removed)="remove(hashtag)" *ngFor="let hashtag of hashtags"
+              [removable]="removable" [selectable]="selectable">
+      {{hashtag}}
+      <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+  <input (matChipInputTokenEnd)="add($event)"
+         *ngIf="hashtags.length <= 10"
+         [matChipInputAddOnBlur]="addOnBlur"
+         [matChipInputFor]="chipList"
+         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+         placeholder="New hashtag...">
+</mat-form-field>

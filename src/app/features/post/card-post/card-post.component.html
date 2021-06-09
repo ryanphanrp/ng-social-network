@@ -1,0 +1,90 @@
+<div *ngIf="!!data" class="card-container">
+  <div class="header-card">
+    <!-- Owner-->
+    <div [routerLink]="['../../profile', data.postedBy.username]" class="owner-post">
+      <div class="avatar-block">
+        <img alt="" src="{{ data.postedBy.avatarUrl }}">
+      </div>
+      <div class="user-profile">
+        <div class="username">{{ data.postedBy.username }}</div>
+        <div class="created-at">{{ data.createdAt |  timeAgo }}</div>
+      </div>
+    </div>
+
+    <!-- Dropdown to delete post-->
+    <div class="more-selection">
+      <button [matMenuTriggerFor]="menu" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>outlined_flag</mat-icon>
+          <span>Report</span>
+        </button>
+
+        <button (click)="newPost.openEditPostDialog(data._id)"
+                *ngIf="curUser._id === data.postedBy._id"
+                mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>Edit this post</span>
+        </button>
+
+        <button (click)="deleteThisPost()"
+                *ngIf="curUser._id === data.postedBy._id"
+                mat-menu-item>
+          <mat-icon style="color: red;">delete</mat-icon>
+          <span style="color: red;">Delete this post</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+  <div class="body-card">
+    <div class="content-card">
+      <div appReducingContent class="content">{{ data.content }}</div>
+      <div class="hashtag-list">
+        <div *ngFor="let hashtag of hashtagList" class="hashtag">{{ hashtag }}</div>
+      </div>
+    </div>
+
+    <!--    Carousel-->
+    <div class="media">
+      <app-carousel [slides]="data.photo"></app-carousel>
+    </div>
+  </div>
+
+  <div class="footer-card">
+
+    <!-- Like-->
+    <div class="liked-group">
+      <div *ngIf="!isLiked; else disLike">
+        <button (click)="likeThisPost()" class="btn-like">
+          <app-svg-icon [name]="'heart-outline'"></app-svg-icon>
+        </button>
+      </div>
+      <ng-template #disLike>
+        <div>
+          <button (click)="unlikeThisPost()" class="btn-like">
+            <app-svg-icon [name]="'heart-fill'"></app-svg-icon>
+          </button>
+        </div>
+      </ng-template>
+      <div [innerHTML]="data.likes | countedLikes" (click)="viewUsersLike()" class="liked-list">vl</div>
+    </div>
+
+    <!-- Comment-->
+    <div class="comments-group">
+      <div class="list-comment">
+        <div *ngFor="let comment of data.comments" class="comment-line">
+          <div class="owner-comment">{{ comment.postedBy.name }}</div>
+          <div class="comment">{{ comment.text }}</div>
+        </div>
+      </div>
+      <app-comment (commentPost)="updateListComment($event)" [postID]="data._id"></app-comment>
+    </div>
+
+    <div *ngIf="option" class="direct-view-post">
+      <div [routerLink]="['posts', data._id]" class="direction">Click to view full this post</div>
+    </div>
+  </div>
+</div>

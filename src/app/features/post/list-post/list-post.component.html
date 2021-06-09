@@ -1,0 +1,27 @@
+<ng-container *ngIf="loading;then loadingZone else showPost">
+  <ng-container *ngIf="!!listPost.length; then showPost else noPost"></ng-container>
+</ng-container>
+
+<ng-template #showPost>
+  <div class="list-post-container">
+    <div (click)="showDetailPost(post._id)" *ngFor="let post of listPost" class="single-post">
+      <img alt="" class="thumbnail" src="{{ post.photo[0] }}">
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noPost>
+  <div class="no-post-container">
+    <div class="no-post-block">
+      <app-svg-icon [name]="'no-post'" [width]="320" [height]="320"></app-svg-icon>
+      <h1>Not Found Any Post</h1>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #loadingZone>
+  <div class="loading-container">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+</ng-template>
+

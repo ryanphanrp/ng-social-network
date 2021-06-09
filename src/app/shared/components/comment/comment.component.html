@@ -1,0 +1,10 @@
+<div class="comment-input-container">
+  <img alt="" class="avatar-owner" src="{{ owner?.avatarUrl }}">
+  <input (keyup.enter)="sendComment()"
+         [(ngModel)]="content"
+         placeholder="Add a comment..."
+         class="comment-input" type="text">
+  <button (click)="sendComment()" [@enterAnimation] *ngIf="content" [disabled]="!content" class="btn-send-comment">
+    POST
+  </button>
+</div>

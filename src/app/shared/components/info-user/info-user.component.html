@@ -1,0 +1,76 @@
+<!-- Avatar, username and name-->
+<div (click)="navigateThisUser()" [ngClass]="isProfilePage ? 'info-container-profile' : 'info-container-home'"
+     class="info-container">
+
+  <!--  Avatar with 2 appearances -->
+  <div [ngStyle]="isProfilePage ? avatars.profile : avatars.home" class="avatar-block">
+    <img alt="" class="avatar" src="{{ thisUser?.avatarUrl }}">
+    <div *ngIf="thisUser?.isVerified && isProfilePage" class="status-overlay isVerified">
+      <app-svg-icon [name]="'verify'" [height]="32" [width]="32"></app-svg-icon>
+    </div>
+  </div>
+
+  <!--  Information Block-->
+  <div class="info-block">
+    <div class="username-block">
+      <!--      username-->
+      <div [ngClass]="isProfilePage ? 'username-profile' : 'username'">
+        {{ thisUser?.username }}
+      </div>
+      <!--      Verify-->
+      <div *ngIf="thisUser?.isVerified && !isProfilePage" class="isVerified">
+        <app-svg-icon [name]="'verify'" [height]="24" [width]="24"></app-svg-icon>
+      </div>
+    </div>
+
+    <!--    Name block-->
+    <div *ngIf="!isProfilePage" class="name-block">
+      {{ thisUser?.name }}
+    </div>
+  </div>
+
+</div>
+
+
+<!--Verify - With user not verified-->
+<ng-container *ngIf="!curUser?.isVerified && !isProfilePage">
+  <div (click)="verifyAccount()" class="alert-verify">Verify your mail now</div>
+</ng-container>
+
+<!--Function with Profile user-->
+<ng-container *ngIf="isProfilePage">
+  <div class="function-block">
+    <ng-container *ngIf="isMe; then me else notMe"></ng-container>
+    <ng-template #me>
+      <button [routerLink]="['update']" class="btn btn-update-profile" matRipple>Update Profile</button>
+    </ng-template>
+    <ng-template #notMe>
+      <button (click)="isFollowed ? unfollowThisUser() : followThisUser()"
+              [ngClass]="isFollowed ? 'btn-unfollow': 'btn-follow'"
+              class="btn"
+              matRipple>{{ isFollowed ? 'Unfollow' : 'Follow' }}</button>
+    </ng-template>
+  </div>
+</ng-container>
+
+<!--Counting User's information-->
+<div class="counting-post-container">
+  <div class="counting-post">
+    <div class="font-semibold text-lg text-center">Posts</div>
+    <div class="text-lg text-center">{{ (postsOfUser | async)?.length || 0 }}</div>
+  </div>
+  <div (click)="getFollowers()" class="counting-post">
+    <div class="font-semibold text-lg text-center">Followers</div>
+    <div class="text-lg text-center">{{ thisUser?.followers?.length }}</div>
+  </div>
+  <div (click)="getFollowing()" class="counting-post">
+    <div class="font-semibold text-lg text-center">Following</div>
+    <div class="text-lg text-center">{{ thisUser?.following?.length }}</div>
+  </div>
+</div>
+
+<!--Show Bio & name in profile page-->
+<div *ngIf="isProfilePage" class="name-bio-container">
+  <div class="name">{{ thisUser?.name }}</div>
+  <div class="bio">{{ thisUser?.bio }}</div>
+</div>

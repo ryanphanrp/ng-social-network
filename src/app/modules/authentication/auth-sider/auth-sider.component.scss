@@ -1,0 +1,10 @@
+@import "mixins";
+
+.auth-sider {
+  height: 100%;
+  @include responsiveSider;
+
+  img {
+    height: 100%;
+  }
+}

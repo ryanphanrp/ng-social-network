@@ -1,0 +1,39 @@
+<div class="newsfeed-container">
+  <!--  Header-->
+  <div class="header">
+    <div (click)="changeMode()" class="switch-title">{{ mode ? 'Followings' : 'Newsfeed' }}</div>
+    <div class="search-block">
+      <app-search-bar></app-search-bar>
+    </div>
+  </div>
+
+  <!--  Main-->
+  <div class="main-newsfeed">
+    <!--    Create a new post-->
+    <div (click)="openDialog()" class="new-post-zone">
+      <img alt="" class="avatar-owner" src="{{ curUser?.avatarUrl }}">
+      <label for="new-post-input"></label>
+      <input class="new-post-input"
+             disabled
+             id="new-post-input"
+             name="new-post" placeholder="What's on your mind?" type="text">
+    </div>
+
+    <!--    List Post on New feeds-->
+    <div class="main-panel">
+      <div (scrolled)="onScroll()"
+           [infiniteScrollDistance]="distance"
+           [infiniteScrollThrottle]="throttle"
+           [infiniteScrollContainer]="selector"
+           [fromRoot]="true"
+           [scrollWindow]="true"
+           infiniteScroll>
+        <ng-container *ngFor="let post of posts">
+          <app-card-post (isDeleted)="handleDeletePost($event)" [setData]="post"></app-card-post>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+

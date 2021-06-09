@@ -1,0 +1,16 @@
+.brand-container {
+  height: 8vh;
+
+  .brand {
+    @apply flex justify-center items-center;
+    @apply mx-auto cursor-pointer p-3;
+
+    h1 {
+      margin: 0 0;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

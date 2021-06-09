@@ -1,0 +1,33 @@
+@import "variables";
+
+.comment-input-container {
+  @apply flex items-center;
+  @apply w-full py-2 pl-0 border-t border-gray-900;
+
+  .avatar-owner {
+    @apply h-10 w-10 rounded-full;
+  }
+
+  .comment-input {
+    @apply w-full rounded-full mx-2;
+    padding: 6px 12px;
+    font-size: 16px;
+    height: 100%;
+
+    &:focus {
+      -webkit-appearance: none;
+      box-shadow: none !important;
+    }
+  }
+
+  .btn-send-comment {
+    font-weight: 600;
+    margin-right: 1rem;
+    color: $bluePrimary;
+  }
+
+  .btn-send-comment:focus {
+    @apply scale-125;
+    outline: none;
+  }
+}

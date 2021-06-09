@@ -1,0 +1,35 @@
+<div class="profile-layout">
+  <!--Top Profile-->
+  <div class="top">
+    <!--    Menu redirect-->
+    <div class="menu-direct">
+      <button [routerLink]="['../../']" class="btn-redirect">
+        <app-svg-icon [name]="'home'"></app-svg-icon>
+      </button>
+      <button [routerLink]="['../../']" class="btn-redirect">
+        <app-svg-icon [name]="'search'"></app-svg-icon>
+      </button>
+      <button [routerLink]="['../../chat']" class="btn-redirect">
+        <app-svg-icon [name]="'messenger'"></app-svg-icon>
+      </button>
+      <button [routerLink]="['../../']" class="btn-redirect">
+        <app-svg-icon [name]="'heart'"></app-svg-icon>
+      </button>
+    </div>
+
+    <!--    Add new post-->
+    <div (click)="openDialog()" *ngIf="isMe" class="menu-add-new-post">
+      <app-svg-icon [height]="32" [name]="'new-post'" [width]="32"></app-svg-icon>
+      <div class="title">New Post</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <!--    List Post-->
+    <div class="container-profile">
+      <app-list-post [ownerListPost]="user" [updateListPost]="success"></app-list-post>
+    </div>
+
+    <!--    Right menu-->
+  </div>
+</div>

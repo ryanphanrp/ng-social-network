@@ -1,0 +1,26 @@
+<div class="confirm-container">
+  <ng-container *ngTemplateOutlet="confirmDialog, context:{title: data?.title, message: data?.message}"></ng-container>
+</div>
+
+<ng-template #confirmDialog let-title="title" let-message="message">
+  <div class="confirm-block">
+    <!-- body -->
+    <div class="body">
+      <!-- Icon -->
+      <div class="alert-icon">
+<!--        <app-svg-icon [name]="'alert'" [height]="40" [width]="40"></app-svg-icon>-->
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <div class="title">{{ title }}</div>
+        <div class="message">{{ message }}</div>
+      </div>
+    </div>
+    <!-- Footer - Action -->
+    <div class="footer">
+      <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+      <button class="btn btn-submit" (click)="onConfirm()">Confirm</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,56 @@
+::ng-deep .mat-dialog-container {
+  padding: 0 0;
+  border-radius: 10px;
+}
+
+.confirm-container {
+}
+
+.confirm-block {
+
+  .body {
+    display: flex;
+    padding: 10px 10px;
+
+    .alert-icon {
+      border-radius: 50%;
+      margin: 15px 15px;
+    }
+
+    .content {
+      width: 100%;
+
+      .title {
+        @apply text-xl my-2 font-semibold tracking-wider
+      }
+
+      .message {
+        @apply text-base;
+      }
+    }
+  }
+
+  .footer {
+    @apply p-2;
+    @apply flex items-center justify-end border bg-gray-100;
+
+    .btn {
+      @apply rounded py-1 px-4 mx-1;
+      @apply text-sm font-semibold tracking-wider;
+      transition: all 0.5s ease-in-out;
+
+      &:focus {
+        transform: scale(1.05);
+      }
+
+      &-submit {
+        @apply border border-red-500 bg-red-500 text-white;
+      }
+
+      &-cancel {
+        @apply border border-gray-700 bg-white text-gray-900;
+      }
+    }
+  }
+
+}

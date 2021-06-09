@@ -1,0 +1,120 @@
+@import "mixins";
+
+.update-information-container {
+  @apply w-full h-full;
+  @apply flex;
+
+  .left-zone {
+    @apply h-full w-1/3;
+    @apply flex flex-col items-center;
+    @apply border-r-2 border-gray-500;
+    @apply p-8;
+
+    .avatar-block {
+      max-height: 200px;
+      max-width: 200px;
+      display: inline-block;
+      position: relative;
+
+      .avatar {
+        @apply h-40 w-40 rounded-full;
+      }
+
+      .status-overlay {
+        background-color: white;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        z-index: 1;
+        padding: 8px;
+        border-radius: 50%;
+        cursor: pointer;
+
+        img {
+          cursor: pointer;
+        }
+
+        &:hover {
+          @apply border-2 border-opacity-40 border-blue-500;
+        }
+
+        &:focus {
+          @apply border-2 border-opacity-50 border-blue-500;
+        }
+      }
+    }
+
+    .information-block {
+      @apply px-4 mt-8;
+      @apply text-2xl tracking-wider font-semibold;
+    }
+
+    .alert-verify {
+      @apply text-blue-500 font-semibold mt-4 tracking-widest cursor-pointer;
+
+      &:focus {
+        @apply outline-none shadow-lg transform scale-105;
+      }
+    }
+  }
+
+  .right-zone {
+    @apply w-2/3 h-full;
+    @apply p-8;
+    @apply flex flex-col items-center justify-start;
+
+    /* Description - function's form */
+    .header-update-information {
+      @apply text-lg font-light tracking-widest;
+    }
+
+    /* Form Container - form fields */
+    .form-container {
+      @apply py-4 w-3/4;
+      @apply flex flex-col items-center;
+
+      .form-field {
+        @apply flex items-center;
+        @apply w-full my-2;
+        @include validationFormField;
+        label {
+          @apply mr-4;
+        }
+      }
+
+      .bio-field {
+        @apply items-start;
+
+        .text-area-field {
+          @apply w-full;
+          textarea::-webkit-scrollbar {
+            width: 4px;
+            overflow-y: scroll;
+            background: transparent;
+          }
+
+          textarea::-webkit-scrollbar-thumb {
+            background: transparent;
+            border-radius: 10px;
+          }
+        }
+      }
+
+      .action-block {
+        @apply w-3/4 mt-2 self-end;
+
+        .btn-submit {
+          @apply py-2 w-1/2 rounded-lg;
+          @apply text-base text-white tracking-wider;
+
+          &:focus {
+            outline: none;
+            @apply transition duration-500 ease-in-out transform scale-100 hover:scale-105;
+          }
+        }
+      }
+    }
+  }
+}
+
+

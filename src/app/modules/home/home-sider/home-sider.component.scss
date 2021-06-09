@@ -1,0 +1,63 @@
+@import "variables";
+@import "mixins";
+
+.home-sider-container {
+  height: 100%;
+  overflow-y: hidden;
+  @include responsiveSider;
+
+  .bottom-home-sider {
+    @apply flex flex-col justify-center;
+
+    /*  Styling menu navigation  */
+    .menu {
+      .menu-child {
+        @apply flex items-center;
+        @apply py-4 px-8 cursor-pointer;
+        @apply font-semibold;
+        @apply border-white;
+        border-left: 10px solid white;
+        font-size: 20px;
+
+        span {
+          @apply ml-6;
+        }
+
+        &:focus {
+          outline: none;
+          @apply bg-gray-200;
+          border-image-slice: 1;
+          border-image-source: linear-gradient(to bottom, rgba(20, 157, 208, 1) 0%, rgba(140, 63, 226, 1) 90%);
+        }
+      }
+
+      .home {
+        border-image-slice: 1;
+        border-image-source: linear-gradient(to bottom, rgba(232, 5, 5, 1) 1.7%, rgba(245, 49, 191, 1) 98.7%);
+        @apply bg-gray-100;
+      }
+    }
+  }
+
+}
+
+::ng-deep .mat-menu-panel {
+  @apply mx-8 w-full max-w-full;
+
+  button {
+    display: flex;
+    align-items: center;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .logout-btn {
+    color: red;
+
+    mat-icon {
+      color: red;
+    }
+  }
+}
+

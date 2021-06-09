@@ -1,0 +1,119 @@
+@import "mixins";
+
+@mixin mediaQueryNewsFeed() {
+  margin-right: auto;
+  margin-left: auto;
+
+  //Media Queries
+  @include mobile {
+    width: 90%;
+  }
+
+  @include tablet {
+    width: 75%;
+  }
+
+  @include desktop {
+    width: 60%;
+  }
+
+  @include fullHD {
+    width: 60%;
+  }
+}
+
+
+/*
+  Newsfeed
+*/
+.newsfeed-container {
+  position: relative;
+  width: 100%;
+
+  /*
+  Header
+  */
+  .header {
+    top: 0;
+    z-index: 99;
+    position: sticky;
+    @apply flex justify-between items-center mx-auto py-4 mb-3;
+
+    //Switch mode view newsfeed
+    .switch-title {
+      @apply text-3xl tracking-wider cursor-pointer text-center font-semibold;
+
+      @include mobile {
+        @apply text-2xl;
+      }
+
+      @include tablet {
+        @apply text-2xl;
+      }
+    }
+
+    //Search block
+    .search-block {
+      @include alignCenter;
+
+      @include mobile {
+        max-width: 50%;
+      }
+    }
+
+    /*
+     Media Queries
+     */
+    @include mobile {
+      width: 90%;
+      background: transparent;
+    }
+
+    @include tablet {
+      width: 75%;
+      background: transparent;
+    }
+
+    @include desktop {
+      width: 100%;
+      background: white;
+      display: flex;
+      margin-bottom: 1rem;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    @include fullHD {
+      width: 100%;
+      background: white;
+      display: flex;
+      margin-bottom: 1rem;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+
+  /*
+  Main Newsfeed
+  */
+  .main-newsfeed {
+    width: 100%;
+    @include mediaQueryNewsFeed();
+
+    //New Post
+    .new-post-zone {
+      @apply py-3 px-4 rounded-xl;
+      @apply border border-gray-400 bg-white;
+      @apply flex items-center;
+
+      .avatar-owner {
+        @apply h-10 w-10 mr-4 rounded-full;
+      }
+
+      .new-post-input {
+        @apply rounded-2xl p-2 h-full w-full;
+        @apply border-none bg-gray-200;
+      }
+    }
+  }
+}

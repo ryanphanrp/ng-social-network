@@ -1,0 +1,57 @@
+<div class="edit-post-container" *ngIf="!!post">
+  <!--  Loading Spinner-->
+  <div *ngIf="isLoading" class="loading-zone">
+    <div class="title">Updating</div>
+    <div class="loading">
+      <div></div>
+    </div>
+  </div>
+
+  <!--  Title and form content for new post-->
+  <div class="edit-post-form">
+    <!--    Title dialog-->
+    <div class="title-dialog">
+      <h2>Edit a post</h2>
+    </div>
+    <mat-divider></mat-divider>
+
+    <!--    Owner-->
+    <div class="owner-post-zone">
+      <img alt="avatar-owner" class="owner-avatar" src="{{ currentUser.avatarUrl }}">
+      <div class="owner-info">
+        <div class="name-owner">{{ currentUser.name }}</div>
+        <div class="time-created">{{ currentUser.email }}</div>
+      </div>
+    </div>
+
+    <!--    Content Input-->
+    <div class="content-input-zone">
+      <label for="content"></label>
+      <textarea [(ngModel)]="post.content"
+                [ngModelOptions]="{standalone: true}" cols="30"
+                id="content"
+                placeholder="What's on your mind?"
+                rows="10"></textarea>
+    </div>
+
+    <!--    Hashtag input-->
+    <div class="hashtag-input-zone">
+      <app-hashtag-chip [hashtags]="post.hashtag.split('-')" (hashTags)="handleHashTag($event)"></app-hashtag-chip>
+    </div>
+
+    <!--    Submit Button-->
+    <div class="submit-zone">
+      <button class="btn btn-cancel" mat-button mat-dialog-close>Cancel</button>
+      <button (click)="onSubmit()"
+
+              [ngClass]="isValidForm()? 'btn-submit' : 'btn-disabled'"
+              class="btn" mat-button>Ok</button>
+    </div>
+  </div>
+  <!--  [disabled]="!isValidForm()"-->
+  <!--  Upload images-->
+  <div class="upload-images-zone">
+    <app-upload-image [setImg]="post.photo" (listImg)="getImage($event)"></app-upload-image>
+  </div>
+</div>
+

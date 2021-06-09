@@ -1,0 +1,92 @@
+<div class="detail-post-container">
+  <!--  Carousel-->
+  <app-carousel [mode]="'dialog'" [slides]="data.photo"></app-carousel>
+
+  <!--  Detail Post-->
+  <div class="detail-post-block">
+    <div class="header-card">
+      <!-- Owner-->
+      <div [routerLink]="['./profile', data.postedBy.username]" class="owner-post">
+        <div class="avatar-block">
+          <img alt="" src="{{ data.postedBy.avatarUrl }}">
+        </div>
+        <div class="user-profile">
+          <div class="username">{{ data.postedBy.name }}</div>
+          <div class="created-at">{{ data.createdAt |  timeAgo }}</div>
+        </div>
+      </div>
+
+      <!-- Dropdown to delete post-->
+      <div class="more-selection">
+        <button [matMenuTriggerFor]="menu" mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>outlined_flag</mat-icon>
+            <span>Report</span>
+          </button>
+          <button
+            (click)="deleteThisPost()"
+            *ngIf="curUser._id === data.postedBy._id"
+            mat-menu-item>
+            <mat-icon style="color: red;">delete</mat-icon>
+            <span style="color: red;">Delete this post</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+    <div class="main-detail-post" id="test">
+
+      <!--      Content-->
+      <div [limit]="30" appReducingContent class="content">
+        {{ data.content }}
+      </div>
+
+      <!--      Hashtags-->
+      <div class="hashtags">
+        <div *ngFor="let hashtag of hashtagList" class="hashtag">{{ hashtag }}</div>
+      </div>
+
+      <!-- Action-->
+      <div class="action-block">
+        <!-- Buttons group-->
+        <div class="buttons-group">
+          <div *ngIf="!isLiked; else disLike">
+            <button (click)="likeThisPost()" class="btn-like">
+              <app-svg-icon [name]="'heart-outline'"></app-svg-icon>
+            </button>
+          </div>
+          <ng-template #disLike>
+            <div>
+              <button (click)="unlikeThisPost()" class="btn-like">
+                <app-svg-icon [name]="'heart-fill'"></app-svg-icon>
+              </button>
+            </div>
+          </ng-template>
+        </div>
+
+        <!-- Show list users like this post-->
+        <div (click)="viewUsersLike()" *ngIf="!!data.likes" [innerHTML]="data.likes | countedLikes"
+             class="liked-list"></div>
+      </div>
+
+      <!--      List comment-->
+      <div class="list-comments">
+        <div *ngFor="let cmt of data.comments" class="comment">
+          <img [src]="cmt.postedBy.avatarUrl" alt="" class="avatar">
+          <div class="owner-comment">
+            <strong>{{ cmt.postedBy.name }}</strong> {{ cmt.text }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-card">
+      <!--      Comment input-->
+      <app-comment (commentPost)="updateComments($event)" [postID]="data._id"></app-comment>
+    </div>
+
+  </div>
+</div>
+

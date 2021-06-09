@@ -1,0 +1,29 @@
+<div class="modal-container">
+  <div class="header">
+    <div class="title">{{ value?.title }}</div>
+    <button (click)="closeDialog()" class="btn-close">
+      <app-svg-icon [name]="'close-circle'"></app-svg-icon>
+    </button>
+  </div>
+  <div class="main">
+    <ng-container *ngFor="let fr of value?.value | async">
+      <div class="friend-inline">
+        <div (click)="gotoProfile(fr.username)" class="friend-block">
+          <div class="avatar-block">
+            <img [src]="fr.avatarUrl" alt="" class="avatar">
+            <div class="status"></div>
+          </div>
+          <div class="name-block">
+            <div class="name">{{ fr.username }}</div>
+            <div class="active">{{ fr.name }}</div>
+          </div>
+        </div>
+        <button [classList]="['btn']"
+                [ngClass]="!existFl(fr._id) ? 'btn-follow': ''"
+                *ngIf="fr._id !== curUser._id"
+                (click)="existFl(fr._id) ? unFollow(fr._id) : follow(fr._id)"
+                class="btn">{{ existFl(fr._id) ? 'Unfollow' : 'follow' }}</button>
+      </div>
+    </ng-container>
+  </div>
+</div>

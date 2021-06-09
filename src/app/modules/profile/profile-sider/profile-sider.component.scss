@@ -1,0 +1,6 @@
+@import "mixins";
+
+.profile-sider {
+  height: 100%;
+  @include responsiveSider;
+}

@@ -1,0 +1,98 @@
+<div class="update-information-container">
+
+  <!--  Left-->
+  <div class="left-zone">
+    <div class="avatar-block">
+      <img alt="" class="avatar" src="{{ curUser?.avatarUrl }}">
+      <div class="status-overlay">
+        <label for="upload"><img alt="" src="https://img.icons8.com/android/24/000000/camera.png"/></label>
+        <input (change)="openUpdateAvatarDialog($event)" hidden id="upload" name="" type="file">
+      </div>
+    </div>
+    <div class="information-block">
+      {{ curUser?.username }}
+    </div>
+    <ng-container *ngIf="!curUser?.isVerified">
+      <div (click)="verifyAccount()" class="alert-verify">Verify your mail now</div>
+    </ng-container>
+  </div>
+
+  <!--  Right-->
+  <div class="right-zone">
+    <div class="header-update-information">
+      Update your information here
+    </div>
+    <form (ngSubmit)="submit()" [formGroup]="infoForm" class="form-container">
+
+      <!-- Name -->
+      <div class="form-field">
+        <label for="name-input">Name</label>
+        <input class="input-field" formControlName="name"
+               id="name-input" name="" placeholder="{{ curUser?.name }}"
+               type="text">
+        <div
+          *ngIf="infoForm.controls['name'].invalid && (infoForm.controls['name'].dirty || infoForm.controls['name'].touched)"
+          class="alert">
+          <div *ngIf="infoForm.controls['name'].errors?.required">
+            Name is required.
+          </div>
+          <div *ngIf="infoForm.controls['name'].errors?.maxlength">
+            Username must have max 30 characters.
+          </div>
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div class="form-field">
+        <label for="username-input">Username</label>
+        <input class="input-field" formControlName="username"
+               id="username-input" name="" placeholder="{{ curUser?.username }}"
+               type="text">
+        <div
+          *ngIf="infoForm.controls['username'].invalid && (infoForm.controls['username'].dirty || infoForm.controls['username'].touched)"
+          class="alert">
+          <div *ngIf="infoForm.controls['username'].errors?.required">
+            Username is required.
+          </div>
+          <div *ngIf="infoForm.controls['username'].errors?.pattern">
+            Please enter unicode characters and between 3 and 20 characters length!
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-field">
+        <label for="email-input">Email</label>
+        <input class="input-field" formControlName="email"
+               id="email-input" name="" placeholder="{{ curUser?.email }}"
+               type="email" [disabled]="true">
+      </div>
+
+      <!-- Bio -->
+      <div class="form-field bio-field">
+        <label for="bio-input">Bio</label>
+        <div class="text-area-field">
+          <textarea class="input-field"
+                    cols="30" formControlName="bio"
+                    id="bio-input"
+                    placeholder="{{curUser?.bio || 'Write something'}}" rows="6"
+          ></textarea>
+          <div
+            *ngIf="infoForm.controls['bio'].invalid && (infoForm.controls['bio'].dirty || infoForm.controls['bio'].touched)"
+            class="alert">
+            <div *ngIf="infoForm.controls['bio'].errors?.maxlength">
+              Your bio must have max 200 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-block">
+        <button [disabled]="infoForm.invalid && infoForm.untouched"
+                [ngClass]="infoForm.valid && infoForm.touched ? 'bg-blue-500' : 'bg-gray-400'"
+                class="btn-submit" matRipple type="submit">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

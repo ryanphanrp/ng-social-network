@@ -1,0 +1,24 @@
+<div class="messenger-container">
+  <div class="conversation-container">
+    <router-outlet></router-outlet>
+  </div>
+
+<!--  List friend active-->
+  <div class="friends-active-container">
+    <div class="title">Contacts</div>
+    <div class="list-friends-active">
+      <ng-container *ngFor="let fr of friends$ | async">
+        <div class="friend-inline" (click)="messengerSr.joinConversation(fr._id)">
+          <div class="avatar-block">
+            <img [src]="fr.avatarUrl" alt="" class="avatar">
+            <div class="status"></div>
+          </div>
+          <div class="name-block">
+            <div class="name">{{ fr.name }}</div>
+            <div class="active">Active now</div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

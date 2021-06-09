@@ -1,0 +1,87 @@
+@import "mixins";
+
+.messages-list-container {
+  @include alignVertical;
+  @apply h-full w-full;
+
+  .header {
+    @apply w-full py-2 px-4 border-b border-gray-800;
+    @apply flex items-center justify-start;
+    @include friendBlock($highlight: true);
+  }
+
+  .main {
+    @apply h-full w-full p-2 overflow-y-scroll;
+    display: flex;
+    flex-direction: column;
+    @include customScrollbar(false, 10px);
+
+    .message-inline {
+      @apply w-full my-1 flex;
+
+      .content {
+        max-width: 50%;
+        @apply px-3 py-1 text-base break-words rounded-2xl;
+        animation: all 0.5s ease-in-out;
+      }
+
+      .me {
+        @apply text-white ml-auto;
+        animation: all 0.5s ease-in-out;
+      }
+
+      .partner {
+        @apply border border-gray-700;
+      }
+
+      .like {
+        @apply text-6xl bg-white border-0;
+      }
+    }
+  }
+
+  /* Input chat new messages */
+  .footer {
+    @apply w-full py-2;
+
+    .new-message-container {
+      @apply w-full h-full px-2;
+      @apply flex justify-center items-center;
+
+      .option-block {
+        @include alignCenter;
+        @apply px-2;
+
+        .btn {
+          @apply mx-2;
+          transition: all 0.5s ease-in-out;
+
+          &:hover {
+            @apply transform scale-110 shadow-lg;
+          }
+        }
+      }
+
+      .new-message-input {
+        bottom: 0;
+        @apply w-full rounded-full bg-gray-100;
+        @apply pl-4 pr-2 py-1.5 text-base;
+        transition: all 0.5s ease-in-out;
+        outline-style: none;
+        border: none;
+
+        &:focus {
+          outline: 0 !important;
+          -webkit-appearance: none;
+          box-shadow: none !important;
+        }
+      }
+
+      .btn-send {
+        @apply my-1 mr-2 ml-4;
+        @apply transform hover:scale-105;
+        @apply transform transition duration-500 focus:-translate-y-0.5;
+      }
+    }
+  }
+}

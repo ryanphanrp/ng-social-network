@@ -1,0 +1,111 @@
+@import "mixins";
+
+.card-container {
+  @apply rounded-2xl bg-white shadow-lg;
+  @apply border border-gray-400;
+  @apply my-4;
+  height: auto;
+
+  // Header
+  .header-card {
+    @apply flex justify-between;
+    @apply mb-2 py-2 px-8;
+
+    // Header Post
+    .owner-post {
+      @apply flex items-end;
+      @apply cursor-pointer;
+
+      .avatar-block {
+        @apply rounded-full;
+        height: 50px;
+        width: 50px;
+        @apply mr-4;
+        img {
+          @apply h-full w-full rounded-full;
+        }
+      }
+
+      .user-profile {
+        .username {
+          @apply font-semibold;
+          font-size: 18px;
+        }
+
+        .created-at {
+          @apply font-light italic;
+        }
+      }
+    }
+
+    &:focus {
+      outline: none;
+      @apply transform scale-105;
+    }
+  }
+
+
+  // Body Post
+  .body-card {
+
+    .content-card {
+      @apply px-8 mb-2 break-all;
+
+      .hashtag-list {
+        @apply flex py-2;
+        .hashtag {
+          @apply py-1 px-2 mx-0.5 text-blue-500 tracking-wide bg-blue-100 rounded-lg;
+        }
+      }
+    }
+
+    .media {
+    }
+  }
+
+
+  // Footer Post
+  .footer-card {
+    @apply pt-2 pb-1 px-4;
+
+    // Like
+    .liked-group {
+      @apply flex items-center mb-2 cursor-pointer;
+
+      .btn-like {
+        @apply mr-4;
+        transition: all 0.5s ease-in-out;
+        // Icon like button
+        &:focus {
+          outline: none;
+          @apply transform scale-125;
+        }
+      }
+    }
+
+    // Comment
+    .comments-group {
+      .list-comment {
+        @apply pb-2;
+        .comment-line {
+          @apply flex;
+          .owner-comment {
+            @apply font-semibold mr-2 whitespace-nowrap;
+          }
+
+          .comment {
+            @apply break-all;
+          }
+        }
+      }
+    }
+
+    .direct-view-post {
+      @include alignCenter;
+
+      .direction {
+        @apply text-base text-blue-600 cursor-pointer;
+      }
+    }
+  }
+}

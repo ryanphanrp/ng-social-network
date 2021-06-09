@@ -1,0 +1,123 @@
+@import "mixins";
+@import "variables";
+
+.container {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  display: flex;
+
+  /*
+  Sider
+  */
+  .sider {
+    float: left;
+    max-width: 40%;
+    width: auto;
+    height: 100%;
+    background: white;
+    border-right: 1px solid gray;
+
+    @include mobile {
+      display: none;
+    }
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  /*
+  Main
+  */
+  .main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+
+    /* Navbar */
+    .nav-bar {
+      width: 100%;
+      z-index: 999;
+      position: fixed;
+      background: white;
+      border-bottom: 1px solid $borderGray;
+      @apply flex items-center justify-between px-4;
+
+      //Brand Name
+      .brand {
+        display: flex;
+        @include alignCenter;
+
+        .brand-name {
+          font-size: 20px;
+          block-size: fit-content;
+        }
+      }
+
+      //Navigation
+      .menu-direction {
+        @include alignCenter;
+
+        .btn {
+          @apply mr-6;
+        }
+
+        .profile-block {
+          display: block;
+          border: 1px solid $borderGray;
+          border-radius: 50%;
+          padding: 1px 1px;
+
+          .avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+          }
+        }
+      }
+
+
+      // Media Queries
+      @include desktop {
+        display: none;
+      }
+
+      @include fullHD {
+        display: none;
+      }
+
+      @include tablet {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+    }
+
+    /* Router Outlet */
+    .outlet {
+      height: 100%;
+      width: 100%;
+      margin-top: 60px;
+
+      @include desktop {
+        margin-top: 0;
+        justify-content: space-around;
+      }
+
+      @include fullHD {
+        margin-top: 0;
+        justify-content: space-around;
+      }
+    }
+  }
+}
+
+
+
+

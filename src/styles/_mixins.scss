@@ -1,0 +1,341 @@
+@import "variables";
+
+/*
+  Align
+*/
+@mixin alignVertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin alignCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*
+    Shape
+*/
+@mixin circleShape($size) {
+  height: $size;
+  width: $size;
+  border-radius: 50%;
+}
+
+
+/*
+*  Input, Button & Field
+*/
+@mixin grayFormField() {
+  @apply rounded-lg p-2 bg-gray-200 w-full border-0;
+
+  &:focus {
+    @apply bg-white border border-gray-500;
+    outline: 0 !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+  }
+}
+
+// Valid Form Field
+@mixin validationFormField() {
+  @apply mb-2 relative;
+
+  label {
+    @apply font-semibold text-base text-right;
+    @apply pl-2 w-1/4;
+  }
+
+  .input-field {
+    @apply rounded-lg p-2 w-full;
+    @include validationInput;
+  }
+
+  .password-field {
+    @include alignCenter();
+    @apply relative;
+
+    .show {
+      @apply absolute px-2 font-semibold tracking-wider text-blue-700;
+      cursor: pointer;
+      z-index: 10;
+      right: 0;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .alert {
+    @apply pl-4 mt-1 text-sm text-red-600;
+  }
+}
+
+@mixin validationInput() {
+  background: #E5E7EB;
+  border: none;
+
+  &.ng-touched.ng-invalid {
+    border: 1px solid crimson;
+    background: white;
+  }
+
+  &.ng-touched.ng-valid {
+    border: 1px solid limegreen;
+    background: white;
+  }
+
+  &:focus {
+    border: 1px solid #374151;
+    background: white;
+    outline: 0 !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+  }
+}
+
+
+// Button
+@mixin submitBtn() {
+  @apply border-0 rounded-lg p-2 my-2;
+  @apply text-white font-semibold tracking-wider text-base;
+
+  &:enabled {
+    @apply bg-blue-500;
+    @include effectScale(1.05, .9);
+  }
+
+  &:disabled {
+    @apply bg-gray-400;
+  }
+
+  &:focus {
+    @apply shadow-lg outline-none;
+  }
+}
+
+
+/*
+  Scrollbar
+*/
+@mixin hiddenScrollbar() {
+  &:focus {
+    outline: 0 !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    overflow-y: scroll;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+  }
+
+  &:active, textarea:hover {
+  }
+}
+
+@mixin customScrollbar($rounded: true, $width: 8px) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-gray-300;
+    @if $rounded {
+      border-radius: 999px;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #ffffff;
+    @if rounded {
+      border: 999px;
+    }
+    box-shadow: inset 7px 10px 12px #f0f0f0;
+  }
+}
+
+
+/*
+  Some Element
+*/
+@mixin avatarBlock($height: 48px, $width: 48px) {
+  position: relative;
+  margin-right: 10px;
+  transition: all 0.5s ease-in-out;
+
+  .avatar {
+    height: $height;
+    width: $width;
+    border-radius: 50%;
+  }
+
+  .status {
+    @apply absolute h-3 w-3 rounded-full;
+    @apply bg-green-500 border-2 border-gray-100 bottom-0 right-0;
+  }
+
+  &:hover {
+    @apply scale-105;
+  }
+}
+
+@mixin friendBlock($height: 48px, $width: 48px, $highlight: false) {
+  cursor: pointer;
+
+  .avatar-block {
+    @include avatarBlock($height, $width);
+  }
+
+  .name-block {
+    .name {
+      @if $highlight {
+        @apply font-semibold;
+      } @else {
+        @apply font-medium;
+      }
+      @apply text-base tracking-wide;
+    }
+
+    .active {
+      @apply text-sm italic tracking-wider;
+    }
+  }
+
+  .name {
+    @apply text-base font-medium tracking-wide;
+  }
+
+}
+
+
+/*
+*   Effects
+*/
+@mixin effectScale($hover, $scale) {
+  transition: transform 250ms ease-in-out;
+
+  &:hover {
+    transform: scale($hover);
+  }
+
+  &:active {
+    transform: scale($scale);
+  }
+}
+
+@mixin loading3Circle() {
+  &, &:before, &:after {
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation: load7 1.8s infinite ease-in-out;
+    animation: load7 1.8s infinite ease-in-out;
+  }
+
+  & {
+    color: #ffffff;
+    font-size: 10px;
+    margin: 80px auto;
+    position: relative;
+    text-indent: -9999em;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+  }
+
+  &:before {
+    left: -3.5em;
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+
+  &:after {
+    left: 3.5em;
+  }
+
+  @-webkit-keyframes load7 {
+    0%,
+    80%,
+    100% {
+      box-shadow: 0 2.5em 0 -1.3em;
+    }
+    40% {
+      box-shadow: 0 2.5em 0 0;
+    }
+  }
+  @keyframes load7 {
+    0%,
+    80%,
+    100% {
+      box-shadow: 0 2.5em 0 -1.3em;
+    }
+    40% {
+      box-shadow: 0 2.5em 0 0;
+    }
+  }
+}
+
+
+/* For Responsive */
+@mixin responsiveSider() {
+  width: $siderSize;
+
+  @include desktop {
+    width: $siderSize * 1.5;
+  }
+}
+
+
+/**
+  Media Queries
+*/
+@mixin mobile {
+  @media (max-width: #{$sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$sm}) and (max-width: #{$md - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$md}) and (max-width: #{$lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin fullHD {
+  @media (min-width: #{$lg + 1px}) {
+    @content
+  }
+}

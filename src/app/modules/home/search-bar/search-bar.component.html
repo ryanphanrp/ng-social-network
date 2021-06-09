@@ -1,0 +1,20 @@
+<form class="example-form">
+  <input type="text"
+         placeholder="&#xF002; Search for a user"
+         [formControl]="keyword"
+         (input)="getUsers($any($event).target.value)"
+         [matAutocomplete]="auto">
+  <mat-autocomplete [classList]="'mat-search'" #auto="matAutocomplete">
+    <mat-option *ngIf="!filteredUsers.length">
+      <div class="user-searching">
+        User not found...
+      </div>
+    </mat-option>
+    <mat-option *ngFor="let user of filteredUsers" [value]="user.name" [routerLink]="['profile', user.username]">
+      <div class="user-searching">
+        <img class="avatar" src="{{ user?.avatarUrl }}" alt="">
+        <span>{{ user?.name }}</span>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+</form>

@@ -1,0 +1,65 @@
+@import "mixins";
+
+::ng-deep .mat-dialog-container {
+  padding: 0 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-container {
+  @apply h-full w-full;
+  @include alignVertical;
+
+  .header {
+    @apply w-full border-b border-gray-800;
+
+    @apply flex items-center;
+    .title {
+      @apply w-full text-center text-base font-semibold py-2;
+    }
+
+    .btn-close {
+      @apply py-1 px-2;
+      @apply cursor-pointer;
+      transition: all 0.5s ease-in-out;
+      @apply transform hover:scale-110;
+    }
+  }
+
+  .main {
+    @apply h-full w-full overflow-y-scroll break-all;
+
+    .friend-inline {
+      @apply flex items-center px-4 py-1;
+
+      .friend-block {
+        @apply flex justify-start items-center;
+        @apply py-1 px-2 rounded-xl w-full cursor-pointer;
+        @include friendBlock();
+
+        &:hover {
+          @apply bg-gray-100;
+        }
+      }
+
+      .btn {
+        @apply w-3/12 ml-2 h-1/2 rounded py-1 border border-gray-800;
+        float: right;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+
+        &:hover {
+        }
+
+        &:focus {
+          transform: scale(1.01);
+        }
+
+        &-follow {
+          @apply text-white bg-blue-500 border-0;
+        }
+      }
+    }
+
+  }
+}

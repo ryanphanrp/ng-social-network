@@ -1,0 +1,151 @@
+@import "mixins";
+
+$height: 40vw;
+$detailWidth: 25vw;
+
+// Detail height
+$headerH: 4vw;
+$mainH: 33vw;
+$footerH: 3vw;
+
+::ng-deep .detail-post-dialog .mat-dialog-container {
+  padding: 0 0;
+  height: 40vw;
+  @apply rounded-2xl;
+
+  @include tablet {
+    height: 70vh;
+  }
+}
+
+
+.detail-post-container {
+  margin: 0 0;
+  padding: 0 0;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+
+  app-carousel {
+    width: 100%;
+  }
+
+
+  .detail-post-block {
+    height: 100%;
+    max-width: 25vw;
+    min-width: 25vw;
+    float: right;
+
+    // Header
+    .header-card {
+      height: $headerH;
+      @apply flex items-center justify-between;
+      @apply py-2 px-4;
+
+      // Header Post
+      .owner-post {
+        @apply flex items-end;
+        @apply cursor-pointer;
+
+        .avatar-block {
+          @apply rounded-full;
+          height: 50px;
+          width: 50px;
+          @apply mr-4;
+          img {
+            @apply h-full w-full rounded-full;
+          }
+        }
+
+        .user-profile {
+          .username {
+            @apply font-semibold;
+            font-size: 18px;
+          }
+
+          .created-at {
+            @apply font-light italic;
+          }
+        }
+      }
+
+      .owner-post:focus {
+        outline: none;
+        @apply transform scale-105;
+      }
+    }
+
+    .main-detail-post {
+      height: $mainH;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+      @apply py-2 px-4;
+      @include hiddenScrollbar;
+
+      //Content
+      .content {
+        @apply break-all;
+      }
+
+      //list hashtags
+      .hashtags {
+        @apply flex py-2;
+        .hashtag {
+          @apply py-1 px-2 mx-0.5 text-blue-500 tracking-wide bg-blue-100 rounded-lg;
+        }
+      }
+
+      // Like
+      .action-block {
+        @apply py-2;
+
+        // Likes and share
+        .buttons-group {
+          @apply flex items-center justify-start;
+          @apply mb-2;
+
+          .btn {
+            // Icon like button
+            @apply mr-2;
+            @apply transition duration-300 ease-in-out transform hover:-translate-y-1;
+
+            &:focus {
+              outline: none;
+              @apply transform scale-105;
+            }
+
+            &-like:focus {
+            }
+          }
+        }
+
+        // List users like post
+        .liked-list {
+          @apply cursor-pointer;
+        }
+      }
+
+      // Comments
+      .list-comments {
+
+        .comment {
+          @apply flex justify-start items-start p-1;
+
+          .avatar {
+            @apply h-8 w-8 mr-2 rounded-full;
+          }
+
+          .owner-comment {
+            @apply break-all;
+          }
+        }
+      }
+    }
+
+    .footer-card {
+      height: $footerH;
+      @apply w-full px-2 pb-2;
+    }
+  }
+}

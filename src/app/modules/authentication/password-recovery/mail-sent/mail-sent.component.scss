@@ -1,0 +1,26 @@
+@import "mixins";
+
+::ng-deep .mail-sent-dialog .mat-dialog-container {
+  padding: 0 0;
+  @apply rounded-xl;
+}
+
+.mail-sent-container {
+  @apply h-full p-4;
+  @include alignVertical;
+
+  .title {
+    @apply text-lg font-semibold tracking-wider mt-2 mb-1;
+  }
+
+  .sub-text {
+    @apply text-center text-sm font-light tracking-wider mb-4;
+  }
+
+  .btn-ok {
+    @apply font-semibold text-base text-white tracking-widest;
+    @apply rounded-lg py-2 w-full bg-green-500;
+    @apply transition duration-500 ease-in-out;
+    @apply hover:scale-105 focus:outline-none focus:scale-95;
+  }
+}

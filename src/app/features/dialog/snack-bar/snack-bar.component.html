@@ -1,0 +1,27 @@
+<div class="snack-bar-container" *ngIf="!!data">
+  <div class="icon">
+    <ng-container *ngTemplateOutlet="icon; context: {type: data.type}"></ng-container>
+  </div>
+
+  <div class="message">{{ data?.message }}</div>
+</div>
+
+<ng-template #icon let-type='type'>
+  <div class="svg-container" *ngIf="type === 'error'">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="14" cy="14" r="14" fill="#E74C3C"/>
+      <path d="M8.40025 6.30018C8.22113 6.30018 8.04182 6.36841 7.90532 6.50526L6.50532 7.90526C6.23162 8.17896 6.23162 8.62211 6.50532 8.89511L11.6104 14.0002L6.50532 19.1053C6.23162 19.379 6.23162 19.8221 6.50532 20.0951L7.90532 21.4951C8.17902 21.7688 8.62217 21.7688 8.89517 21.4951L14.0002 16.39L19.1053 21.4951C19.3783 21.7688 19.8222 21.7688 20.0952 21.4951L21.4952 20.0951C21.7689 19.8214 21.7689 19.3783 21.4952 19.1053L16.3901 14.0002L21.4952 8.89511C21.7689 8.62211 21.7689 8.17826 21.4952 7.90526L20.0952 6.50526C19.8215 6.23156 19.3783 6.23156 19.1053 6.50526L14.0002 11.6103L8.89517 6.50526C8.75832 6.36841 8.57936 6.30018 8.40025 6.30018Z" fill="white"/>
+    </svg>
+  </div>
+  <div class="svg-container" *ngIf="type === 'success'">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="14" cy="14" r="14" fill="#2ECC71"/>
+      <path d="M11.0472 20.7551L5.21383 14.9217C4.92872 14.6366 4.92872 14.1751 5.21383 13.8907L6.24487 12.8597C6.52997 12.5746 6.99154 12.5746 7.27591 12.8597L11.5627 17.1464L19.4953 9.21383C19.7804 8.92872 20.242 8.92872 20.5263 9.21383L21.5574 10.2449C21.8425 10.53 21.8425 10.9915 21.5574 11.2759L12.0782 20.7551C11.7938 21.0402 11.3315 21.0402 11.0472 20.7551Z" fill="white"/>
+    </svg>
+  </div>
+  <div class="svg-container" *ngIf="type === 'loading'">
+    <svg class="spinner">
+      <circle cx="14" cy="14" r="12"></circle>
+    </svg>
+  </div>
+</ng-template>

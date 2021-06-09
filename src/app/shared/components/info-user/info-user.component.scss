@@ -1,0 +1,133 @@
+@import "animations";
+@import "mixins";
+
+
+/* Information */
+.info-container {
+  @apply flex items-center cursor-pointer;
+  @apply p-8 pb-4;
+
+  .avatar-block {
+    @apply mr-4;
+    min-width: 88px;
+    min-height: 88px;
+    position: relative;
+    display: inline-block;
+
+    .avatar {
+      @apply rounded-full h-full w-full;
+    }
+
+    .status-overlay {
+      background-color: white;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      height: 32px;
+      width: 32px;
+      z-index: 1;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+
+  .info-block {
+    @apply flex flex-col;
+
+    .username-block {
+      @apply flex;
+      .username {
+        @apply font-semibold text-lg;
+        &-profile {
+          @apply font-sans text-3xl font-semibold;
+        }
+      }
+    }
+
+    .name-block {
+      @apply font-light font-serif text-lg;
+    }
+  }
+
+  &:focus {
+    outline: none;
+    @apply transform scale-105;
+  }
+
+  &-home {
+    display: flex;
+  }
+
+  &-profile {
+    display: flex;
+    flex-direction: column;
+
+    .username-block {
+      @apply flex flex-col items-center mt-4;
+    }
+  }
+}
+
+/* Alert Verify */
+.alert-verify {
+  @apply text-center text-blue-600 tracking-widest font-semibold cursor-pointer;
+
+  &:focus {
+    @apply outline-none shadow-lg;
+  }
+}
+
+/* Button - Update Profile, Follow and Unfollow */
+.function-block {
+  @apply w-4/5 ml-auto mr-auto;
+
+  .btn {
+    @apply font-semibold tracking-wider;
+    @apply p-2 w-full;
+    @apply border-2 bg-white rounded-lg;
+
+    &:focus {
+      outline: none;
+    }
+
+    &-follow {
+      @apply border-blue-500 text-blue-500;
+    }
+
+    &-unfollow {
+      @apply border-green-500 text-green-500;
+    }
+
+    &-update-profile {
+      @apply border-gray-500 text-gray-500 bg-white;
+    }
+  }
+}
+
+/* Information about post, followers and following */
+.counting-post-container {
+  @apply flex justify-around items-center my-4 px-8;
+
+  .counting-post {
+    @apply flex flex-col justify-center cursor-pointer;
+  }
+}
+
+/* User's name and Bio */
+.name-bio-container {
+  @apply px-8;
+
+  .name {
+    @apply text-xl font-serif font-light;
+  }
+
+  .bio {
+    @apply break-all mt-2;
+  }
+}
+
+::ng-deep .isVerified .svg-icon {
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(88, 120, 243, 0.4);
+  animation: rotateAnim 3s infinite;
+}

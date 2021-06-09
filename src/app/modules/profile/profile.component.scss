@@ -1,0 +1,78 @@
+@import "mixins";
+
+.profile-layout {
+  @apply h-full flex flex-col;
+
+  /*Top - Profile*/
+  .top {
+    @include alignCenter;
+    width: 100%;
+    height: 10%;
+    border-bottom: 1px solid #b2bec3;
+
+    /* Navigation */
+    .menu-direct {
+      width: 100%;
+      @include alignCenter;
+
+      .btn-redirect {
+        @apply mx-2;
+      }
+    }
+
+    /* Create New post */
+    .menu-add-new-post {
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      cursor: pointer;
+      width: auto;
+      min-width: 10%;
+
+      .title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-left: 5px;
+
+        /* Media Queries */
+        @include mobile {
+          display: none;
+        }
+
+        @include tablet {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /*Main - Profile*/
+  .main {
+    @apply flex;
+    height: 100%;
+    width: 100%;
+
+    .container-profile {
+      @apply py-2 h-full w-11/12 mx-auto;
+      @include alignCenter;
+
+      app-list-post {
+        height: 100%;
+        width: 100%;
+      }
+
+      @include desktop {
+        @apply w-4/5;
+      }
+    }
+  }
+}
+
+.btn-redirect {
+  @apply p-1 cursor-pointer;
+  @apply transition duration-500 ease-in-out hover:translate-y-1;
+
+  &:focus {
+    @apply transform scale-105;
+  }
+}

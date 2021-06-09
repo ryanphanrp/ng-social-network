@@ -1,0 +1,25 @@
+<div class="carousel-container" [style]="options[mode]">
+  <ng-container *ngFor="let img of slides; index as i">
+    <img *ngIf="i === curIndex" [@slideAnimation]="'fade'" [style]="options[mode]" [src]="img" alt="" loading="lazy">
+    <!--    <img *ngIf="i === curIndex" [style]="options[mode]" [src]="img" alt="" loading="lazy">-->
+  </ng-container>
+
+  <div class="controls">
+    <button (click)="onPre()" *ngIf="curIndex !== 0" class="control left">
+      <svg fill="none" height="25" viewBox="0 0 25 25" width="25" xmlns="http://www.w3.org/2000/svg">
+        <path clip-rule="evenodd"
+              d="M12.5 25C19.4025 25 25 19.4025 25 12.5C25 5.59754 19.4025 0 12.5 0C5.59754 0 0 5.59754 0 12.5C0 19.4025 5.59754 25 12.5 25ZM13.0744 19.1002L7.3912 13.417C6.82691 12.8527 6.81179 11.8955 7.37608 11.3261L13.0593 5.64294C14.4146 4.28764 16.5155 6.37349 15.1653 7.72375L10.525 12.364C11.553 13.3954 12.5832 14.4245 13.6127 15.4529C14.1272 15.9668 14.6415 16.4805 15.1552 16.9942C16.5105 18.3495 14.4246 20.4505 13.0744 19.1002Z"
+              fill="white"
+              fill-rule="evenodd"/>
+      </svg>
+    </button>
+    <button (click)="onNext()" *ngIf="curIndex !== slides.length - 1" class="control right">
+      <svg fill="none" height="25" viewBox="0 0 25 25" width="25" xmlns="http://www.w3.org/2000/svg">
+        <path clip-rule="evenodd"
+              d="M12.5 0C5.59754 0 0 5.59754 0 12.5C0 19.4025 5.59754 25 12.5 25C19.4025 25 25 19.4025 25 12.5C25 5.59754 19.4025 0 12.5 0ZM11.9256 5.89979L17.6088 11.583C18.1731 12.1473 18.1882 13.1045 17.6239 13.6739L11.9407 19.3571C10.5854 20.7124 8.48446 18.6265 9.83472 17.2762L14.475 12.636C13.447 11.6046 12.4168 10.5755 11.3873 9.54714C10.8728 9.03323 10.3585 8.51951 9.8448 8.00579C8.4895 6.65049 10.5754 4.54952 11.9256 5.89979Z"
+              fill="white"
+              fill-rule="evenodd"/>
+      </svg>
+    </button>
+  </div>
+</div>

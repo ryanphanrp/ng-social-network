@@ -1,0 +1,33 @@
+@import "mixins";
+
+.messenger-container {
+  @apply w-full h-full flex;
+  overflow: hidden;
+
+  .conversation-container {
+    @apply h-full w-3/4;
+  }
+
+  .friends-active-container {
+    @apply h-full w-1/4 p-2 overflow-hidden border-l border-gray-800;
+    @apply flex flex-col;
+
+    .title {
+      @apply text-lg font-semibold tracking-widest mb-4;
+    }
+
+    .list-friends-active {
+      @apply h-full flex flex-col;
+
+      .friend-inline {
+        @apply flex justify-start items-center;
+        @apply py-2 px-4 rounded-xl cursor-pointer;
+        @include friendBlock();
+
+        &:hover {
+          @apply bg-gray-100;
+        }
+      }
+    }
+  }
+}

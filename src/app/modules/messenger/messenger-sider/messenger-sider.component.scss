@@ -1,0 +1,118 @@
+@import "mixins";
+@import "animations";
+
+.messenger-sider-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  @include responsiveSider;
+
+  // Owner block
+  .owner-block {
+    @apply py-4 cursor-pointer;
+    @include alignCenter;
+
+    .avatar {
+      @apply rounded-full h-12 w-12;
+    }
+
+    .username {
+      @apply font-semibold ml-4 text-xl;
+    }
+  }
+
+  // Search User
+  .search-user-block {
+    @apply py-2 px-4;
+    @include alignCenter;
+
+    .icon {
+      @apply mx-2;
+      transition: all 0.5s ease-in-out;
+
+      &:focus {
+        transform: scale(1.05);
+      }
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    input {
+      @apply bg-gray-100 border-0;
+      @apply w-full rounded-full pl-4 pr-2 py-2;
+
+      &:focus {
+        outline: 0 !important;
+        -webkit-appearance: none;
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  // List conversation
+  .conversation-list-container {
+    @apply p-2 h-full;
+    overflow-y: scroll;
+    @include customScrollbar();
+
+    .conversation-inline {
+      @apply w-full py-2 my-1 pl-4 pr-8 rounded-lg cursor-pointer;
+      @apply bg-gray-100 bg-opacity-75;
+      @apply flex justify-between items-center;
+
+      .partner-information {
+        @include alignCenter;
+        @include friendBlock();
+      }
+
+
+      .btn-join {
+        right: 0;
+        @apply rounded-xl shadow-lg;
+        position: relative;
+        animation: bounce 2s infinite;
+
+        svg {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          fill: hsl(243, 80%, 62%);
+        }
+      }
+
+      &:hover {
+        @apply shadow-lg border border-gray-600;
+      }
+    }
+
+    .active {
+      @apply bg-gray-200 bg-opacity-100;
+    }
+  }
+
+  // Result of searching
+  .searching-friends-container {
+    @apply p-2;
+
+    .friend-inline {
+      @apply w-full py-3 my-1 pl-4 pr-8 rounded-lg cursor-pointer;
+      @apply bg-gray-100 bg-opacity-75;
+      @apply flex justify-start items-center;
+
+      .avatar {
+        @apply h-10 w-10 rounded-full mr-4;
+      }
+
+      .name {
+        @apply text-base font-medium tracking-wider;
+      }
+    }
+
+    .show-error {
+      @apply text-center text-lg text-gray-900;
+    }
+  }
+}

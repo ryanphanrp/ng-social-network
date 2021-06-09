@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="sider">
+    <router-outlet name="sider"></router-outlet>
+  </div>
+  <div [@enterAnimation] class="main">
+
+    <!-- Navbar -->
+    <div class="nav-bar">
+      <!--      Brand Name-->
+      <div class="brand">
+        <img alt="" src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/>
+        <div class="brand-name">Instagram</div>
+      </div>
+
+      <!--      Navigation-->
+      <div class="menu-direction">
+        <!-- Home -->
+        <div class="btn btn-home" [routerLink]="['.']">
+          <app-svg-icon [name]="'home'"></app-svg-icon>
+        </div>
+
+        <!-- Messenger -->
+        <div class="btn btn-messenger" [routerLink]="['chat']">
+          <app-svg-icon [name]="'messenger'"></app-svg-icon>
+        </div>
+
+        <!--        Notifications-->
+        <div class="btn btn-notification" [routerLink]="['.']">
+          <app-svg-icon [name]="'notification'"></app-svg-icon>
+        </div>
+
+        <!--        Profile-->
+        <div class="profile-block" [routerLink]="['profile', curUser?.username]">
+          <img alt="" class="avatar" src="{{ curUser?.avatarUrl }}">
+        </div>
+      </div>
+    </div>
+
+    <!-- Router Outlet -->
+    <div class="outlet">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

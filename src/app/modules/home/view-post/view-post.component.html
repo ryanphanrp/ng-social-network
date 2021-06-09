@@ -1,0 +1,5 @@
+
+<div class="detail-post-container" *ngIf="post$ !== null">
+  <button class="direct-to-home" [routerLink]="['/']">Back to home</button>
+  <app-card-post [option]="false" [setData]="post$ | async"></app-card-post>
+</div>

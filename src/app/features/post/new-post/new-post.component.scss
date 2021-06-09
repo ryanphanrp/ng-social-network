@@ -1,0 +1,154 @@
+@import "mixins";
+
+::ng-deep .new-post-dialog .mat-dialog-container {
+  padding: 0 0;
+  height: 100%;
+  width: 100%;
+  @apply rounded-2xl;
+}
+
+::ng-deep .new-post-container {
+  margin: 0 0;
+  padding: 0 0;
+  height: 100%;
+  width: 100%;
+  @apply relative;
+  @apply flex items-center;
+  @apply shadow-lg rounded-2xl;
+
+  // Styling Form create new Post
+  .new-post-form {
+    @apply h-full w-2/5;
+    @apply shadow-lg border border-gray-400 rounded-2xl;
+
+    .title-dialog {
+      @apply w-full p-2;
+      @include alignCenter;
+      height: 7%;
+
+      h2 {
+        margin: 0 0;
+      }
+    }
+
+    mat-divider {
+      @apply mx-4;
+    }
+
+    // Header - Owner
+    .owner-post-zone {
+      height: 10%;
+      @apply flex items-center p-2;
+
+      .owner-avatar {
+        @include circleShape(50px);
+        @apply mx-4;
+      }
+
+      .owner-info {
+        @apply flex flex-col;
+
+        .name-owner {
+          @apply font-semibold;
+          font-size: 18px;
+        }
+
+        .time-created {
+          @apply font-light font-serif italic;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .content-input-zone {
+      height: 50%;
+      @apply p-2;
+
+      textarea {
+        @apply h-full w-full rounded-2xl p-2 border-2;
+        outline-style: none;
+        border: none;
+        resize: none;
+        overflow-y: scroll;
+
+        &:focus {
+          outline: 0 !important;
+          -webkit-appearance: none;
+          box-shadow: none !important;
+        }
+
+        &::-webkit-scrollbar {
+          width: 4px;
+          overflow-y: scroll;
+          background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: transparent;
+          border-radius: 10px;
+        }
+
+        &:active, &:hover {
+        }
+      }
+    }
+
+    .hashtag-input-zone {
+      height: 23%;
+      @apply p-2;
+    }
+
+    // Action - submit
+    .submit-zone {
+      height: 10%;
+      @apply p-2 flex;
+
+      .btn {
+        @apply h-full w-full rounded-2xl;
+        @apply font-black tracking-widest;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .mat-button {
+        border: 2px solid;
+      }
+
+      .btn-submit {
+        @apply ml-1 text-white bg-blue-500 border border-blue-500;
+      }
+
+      .btn-disabled {
+        @apply bg-gray-500 text-white;
+      }
+
+      .btn-cancel {
+        @apply mr-1 text-gray-500 border border-gray-500;
+      }
+    }
+  }
+
+  // Styling Upload Images Zone
+  .upload-images-zone {
+    @apply h-full w-3/5;
+  }
+
+  // Loading Zone
+  .loading-zone {
+    @apply absolute;
+    @apply h-full w-full;
+    @include alignVertical;
+    @apply bg-gray-400 bg-opacity-50 absolute z-30;
+
+    .title {
+      @apply text-3xl my-2 font-semibold tracking-widest text-white;
+    }
+
+    .loading {
+      @include loading3Circle;
+      margin: 10px 0 !important;
+    }
+  }
+}

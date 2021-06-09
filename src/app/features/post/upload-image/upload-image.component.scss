@@ -1,0 +1,120 @@
+@import "mixins";
+
+.prepare-upload {
+  @apply flex items-center justify-center h-full w-full;
+}
+
+.menu-crop-image {
+  height: 13%;
+  @apply flex justify-center items-center;
+  @apply w-full;
+
+  .menu-child {
+    @apply flex flex-col justify-center items-center;
+    @apply w-1/5;
+
+    .child {
+      @apply w-full p-1;
+      @apply flex justify-around items-center;
+
+      .toggle {
+        @apply px-2 py-1 rounded-3xl border border-blue-500 text-blue-700;
+        @apply focus:bg-blue-500 focus:text-white;
+      }
+
+      .btn {
+        @apply p-1 rounded-full;
+        @apply hover:bg-gray-100 bg-opacity-20;
+        @apply transform hover:scale-105;
+      }
+
+      input{
+        width: 100%;
+        padding: 2px 2px 2px 10px;
+        font-size: 20px;
+        border-radius: 15px;
+      }
+
+      select {
+        padding: 2px 7px;
+        width: 70%;
+        border-radius: 15px;
+      }
+    }
+
+    &:last-child {
+      @apply w-2/5;
+    }
+  }
+}
+
+.img-cropper-container {
+  @apply border border-blue-600;
+  height: 62%;
+  position: relative;
+
+  .done-btn {
+    @apply p-2 m-4 rounded-full border-blue-500;
+    position: absolute;
+    z-index: 999;
+    right: 0;
+    bottom: 0;
+
+    &:focus {
+      @apply transform scale-125 outline-none;
+      @apply bg-gray-200 bg-opacity-20;
+    }
+  }
+}
+
+image-cropper {
+  border: 2px solid green;
+}
+
+.list-cropped-img {
+  height: 25%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  @include customScrollbar(false, 10px);
+}
+
+.card {
+  height: 100%;
+  display: inline-block;
+  position: relative;
+
+  .cropped-img {
+    height: 100%;
+  }
+
+  .actions {
+    display: none;
+    position: absolute;
+
+    .btn {
+      @apply bg-transparent;
+      @apply p-1 m-1 rounded;
+
+      &:hover {
+        @apply bg-gray-100;
+      }
+
+      &:focus {
+        @apply outline-none bg-gray-200 bg-opacity-25;
+      }
+    }
+  }
+
+  &:hover {
+    .cropped-img {
+      filter: blur(3px);
+    }
+
+    .actions {
+      display: block;
+      @apply absolute z-50 flex;
+    }
+  }
+}

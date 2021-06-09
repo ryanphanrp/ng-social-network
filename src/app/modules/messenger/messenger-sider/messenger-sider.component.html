@@ -1,0 +1,71 @@
+<div class="messenger-sider-container">
+  <app-brand></app-brand>
+
+  <div [routerLink]="['./']" class="owner-block">
+    <img [src]="curUser.avatarUrl" alt="" class="avatar">
+    <div class="username">{{ curUser.username }}</div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <!--  Searching input-->
+  <div class="search-user-block">
+    <button (click)="switchMode()" *ngIf="searching" class="icon">
+      <svg fill="none" height="28" viewBox="0 0 40 40" width="28" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M28.18 0C35.24 0 40 4.542 40 11.32V28.66C40 35.44 35.24 40 28.18 40H11.84C4.76 40 0 35.44 0 28.66V11.32C0 4.542 4.76 0 11.84 0H28.18ZM20.42 11.44C19.84 10.86 18.88 10.86 18.3 11.44L10.76 18.94C10.2 19.5 10.2 20.5 10.76 21.06L18.3 28.56C18.88 29.14 19.84 29.14 20.42 28.56C21 27.96 21 27.02 20.42 26.42L15.46 21.5H28.16C29 21.5 29.66 20.82 29.66 20C29.66 19.16 29 18.5 28.16 18.5H15.46L20.42 13.56C20.7 13.28 20.86 12.88 20.86 12.5C20.86 12.122 20.7 11.74 20.42 11.44Z"
+          fill="#615D5D"/>
+      </svg>
+    </button>
+    <input (click)="searching = true" (input)="getFriends($any($event))"
+           [(ngModel)]="keyword"
+           id="searching-fr-input"
+           placeholder="Search friends..." type="text">
+  </div>
+  <ng-container *ngTemplateOutlet="searching ? friendList : listConversation"></ng-container>
+</div>
+
+
+<!--List Conversation-->
+<ng-template #listConversation>
+  <div class="conversation-list-container">
+    <div *ngFor="let conversation of conversations | async" class="conversation-inline">
+
+      <!--      Information of Conversation-->
+      <div class="partner-information" (click)="joinConversation(conversation._id)">
+        <div class="avatar-block">
+          <img alt="" class="avatar" src="{{ (conversation.members | toPartner).avatarUrl }}">
+          <div class="status"></div>
+        </div>
+        <div class="name">{{ (conversation.members | toPartner).username }}</div>
+      </div>
+
+      <!--      Button - Join conversation-->
+      <button (click)="joinConversation(conversation._id)" class="btn-join">
+        <svg fill="none" height="32" viewBox="0 0 40 40" width="32" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M28.16 0C35.24 0 40 4.56 40 11.34V28.68C40 35.458 35.24 40 28.16 40H11.82C4.76 40 0 35.458 0 28.68V11.34C0 4.56 4.76 0 11.82 0H28.16ZM21.7 11.44C21.12 10.86 20.16 10.86 19.58 11.44C19 12.04 19 12.98 19.58 13.58L24.54 18.5H11.84C11 18.5 10.34 19.18 10.34 20C10.34 20.84 11 21.5 11.84 21.5H24.54L19.58 26.44C19.3 26.72 19.14 27.12 19.14 27.5C19.14 27.878 19.3 28.26 19.58 28.56C20.16 29.14 21.12 29.14 21.7 28.56L29.24 21.06C29.8 20.5 29.8 19.5 29.24 18.94L21.7 11.44Z"
+            fill="#009AEC"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
+<!--Show result of searching-->
+<ng-template #friendList>
+  <div class="searching-friends-container">
+    <ng-container *ngFor="let friend of friends">
+      <div (click)="messengerSr.joinConversation(friend._id)" class="friend-inline">
+        <img alt="" class="avatar" src="{{ friend?.avatarUrl }}">
+        <div class="name">{{ friend?.username }}</div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!friends.length">
+      <div class="show-error">
+        Cant found this friend
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
