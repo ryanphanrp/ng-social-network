@@ -42,12 +42,12 @@ export class MessengerService {
     this.addNewConversation(ID).subscribe(
       res => {
         console.log(res);
-        this.router.navigate(['chat', res.data.newConversation._id]).then(r => {
+        this.router.navigate(['chat', res.data.newConversation._id]).then(_ => {
         });
       },
       err => {
         console.log(err.error.data);
-        this.router.navigate(['chat', err.error.data._id]).then(r => {
+        this.router.navigate(['chat', err.error.data._id]).then(_ => {
         });
       }
     );
@@ -67,9 +67,8 @@ export class MessengerService {
 
   // get Message by API
   getMessageAPI(ID: string): Observable<IMessage[]> {
-    console.log(ID);
     return this.http.get<any>(AUTH_API + 'getMessages/' + ID, httpOptions).pipe(
-      map(res => res.data.messages),
+      map(res => res.data),
       delay(50));
   }
 
