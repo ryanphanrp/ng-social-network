@@ -1,11 +1,13 @@
+@import "mixins";
+
 .update-profile-container {
   @apply h-full w-full;
   @apply py-8;
-  @apply flex justify-center items-center;
+  @include alignCenter;
 
   .update-profile-block {
     @apply border-2 border-gray-500 border-opacity-30 rounded-2xl;
-    @apply h-full w-2/3;
+    @apply h-full bg-white w-2/3;
 
     ::ng-deep .mat-tab-body-wrapper{
       @apply p-0 h-full w-full;

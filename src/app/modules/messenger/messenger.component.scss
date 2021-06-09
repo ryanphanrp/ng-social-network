@@ -1,7 +1,7 @@
 @import "mixins";
 
 .messenger-container {
-  @apply w-full h-full flex;
+  @apply w-full h-full flex bg-white;
   overflow: hidden;
 
   .conversation-container {

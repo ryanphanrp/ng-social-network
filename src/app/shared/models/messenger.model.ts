@@ -13,3 +13,7 @@ export interface IMessage {
   senderId: string;
   Date: string;
 }
+
+export function toPartner(conversation: IConversation, ID: string): IUser {
+  return conversation.members.find(el => el._id !== ID) as IUser;
+}

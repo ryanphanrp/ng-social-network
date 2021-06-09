@@ -68,20 +68,6 @@
   .footer-card {
     @apply pt-2 pb-1 px-4;
 
-    // Like
-    .liked-group {
-      @apply flex items-center mb-2 cursor-pointer;
-
-      .btn-like {
-        @apply mr-4;
-        transition: all 0.5s ease-in-out;
-        // Icon like button
-        &:focus {
-          outline: none;
-          @apply transform scale-125;
-        }
-      }
-    }
 
     // Comment
     .comments-group {

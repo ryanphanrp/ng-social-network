@@ -50,25 +50,8 @@
 
       <!-- Action-->
       <div class="action-block">
-        <!-- Buttons group-->
-        <div class="buttons-group">
-          <div *ngIf="!isLiked; else disLike">
-            <button (click)="likeThisPost()" class="btn-like">
-              <app-svg-icon [name]="'heart-outline'"></app-svg-icon>
-            </button>
-          </div>
-          <ng-template #disLike>
-            <div>
-              <button (click)="unlikeThisPost()" class="btn-like">
-                <app-svg-icon [name]="'heart-fill'"></app-svg-icon>
-              </button>
-            </div>
-          </ng-template>
-        </div>
-
-        <!-- Show list users like this post-->
-        <div (click)="viewUsersLike()" *ngIf="!!data.likes" [innerHTML]="data.likes | countedLikes"
-             class="liked-list"></div>
+        <!-- Likes group-->
+        <app-likes [postID]="data._id" [Likes]="data.likes"></app-likes>
       </div>
 
       <!--      List comment-->

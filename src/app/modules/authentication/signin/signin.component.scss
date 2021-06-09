@@ -1,7 +1,8 @@
 @import "mixins";
 
 .sign-container {
-  @apply h-full w-full flex justify-center items-center relative;
+  @apply h-full w-full bg-white relative;
+  @include alignCenter;
 
   /* Direction */
   .direct-option {

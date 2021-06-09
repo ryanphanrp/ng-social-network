@@ -4,7 +4,6 @@ import {DialogService} from '@features/dialog/dialog.service';
 import {UserService} from '@core/_services/user.service';
 import {PostService} from '@core/_services/post.service';
 import {NewPostService} from '@features/post/new-post.service';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-card-post',
@@ -45,40 +44,6 @@ export class CardPostComponent implements OnInit {
     this.cdRef.markForCheck();
   }
 
-  /*
-  *   Like & Unlike
-  * */
-  likeThisPost(): void {
-    this.isLiked = !this.isLiked;
-    this.postSr.likePost(this.data?._id).subscribe(
-      (_: any) => {
-        this.data.likes.push(this.curUser._id);
-      }
-    );
-  }
-
-  unlikeThisPost(): void {
-    this.isLiked = !this.isLiked;
-    this.postSr.unlikePost(this.data?._id).subscribe(
-      (_: any) => {
-        this.data.likes = this.data?.likes.filter(ele => ele !== this.curUser?._id);
-      }
-    );
-  }
-
-
-  /*
-    View User Like Post
-  */
-  viewUsersLike(): void {
-    this.newPost.viewUsersLikePost(this.data._id).subscribe(
-      (res: any) => {
-        if (res) {
-          this.ngOnInit();
-        }
-      }
-    );
-  }
 
   /*
    * Update list comment
