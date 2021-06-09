@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PostService, UserService} from '@core/_services';
 import {IUser} from '@shared/models';
-import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DialogService} from '@features/dialog/dialog.service';
 
