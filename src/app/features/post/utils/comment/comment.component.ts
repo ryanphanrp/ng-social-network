@@ -15,7 +15,7 @@ export class CommentComponent implements OnInit {
   @Output() commentPost = new EventEmitter<IComment>();
 
   content = '';
-  owner: IOwner = parseIOwner(this.userService.getCurrentUser());
+  owner: IOwner = parseIOwner(this.userService.currentUser);
 
   constructor(private postServices: PostService,
               private userService: UserService) {

@@ -30,7 +30,7 @@ export class NewPostComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getCurrentUser();
+    this.currentUser = this.userService.currentUser;
   }
 
 
@@ -77,7 +77,7 @@ export class NewPostComponent implements OnInit  {
             this.dialogRef.close(true);
         }
       },
-      (err: any) => {
+      (__: any) => {
         this.dialogSr.error('Something went wrong.');
       }
     );

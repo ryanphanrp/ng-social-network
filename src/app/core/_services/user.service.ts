@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
-import {delay, map, switchMap} from 'rxjs/operators';
+import {delay, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 import {IPost, IUser} from '@shared/models';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {TokenService} from '@core/_services/token.service';
 
@@ -12,24 +12,70 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
 
+const initialState: IUser = {
+  _id: 'string',
+  email: 'string',
+  username: 'string',
+  isVerified: false,
+  name: 'string',
+  avatarUrl: 'string',
+  bio: 'string',
+  posts: 0,
+  followers: [],
+  following: []
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  currentUser: IUser = this.getCurrentUser();
+  private currentUser$: BehaviorSubject<IUser>;
 
   constructor(
     private http: HttpClient,
     private tokenSr: TokenService) {
+    this.currentUser$ = new BehaviorSubject<IUser>(initialState);
+    this.initialCurrentUser();
   }
+
+  get currentUser(): IUser {
+    return this.currentUser$.value;
+  }
+
+  /*
+    State Current User Management
+  */
+  initialCurrentUser(): void {
+    this.setState(this.getCurrentUserInStorage());
+  }
+
+  setState(value: IUser): void {
+    console.log('set state: ' + value);
+    this.currentUser$.next(value);
+  }
+
+  getCurrentUser(): Observable<IUser> {
+    return this.currentUser$.asObservable().pipe(distinctUntilChanged());
+  }
+
+  updateCurrentUser(): void {
+    this.getInfoUser(this.currentUser.username).subscribe(
+      (next: IUser) => {
+        this.setState(next);
+        // Next userSource
+        this.tokenSr.saveUser(next);
+      }
+    );
+  }
+
 
   /*
   *  User in local
   * */
 
   // Get information of current user in local storage
-  getCurrentUser(): IUser {
+  getCurrentUserInStorage(): IUser {
     return JSON.parse(localStorage.getItem('auth-user') as string) as IUser;
   }
 
@@ -37,18 +83,6 @@ export class UserService {
   updateUserInLocal(user: IUser): boolean {
     window.localStorage.setItem('auth-user', JSON.stringify(user));
     return true;
-  }
-
-  // Update current user in whole project
-  updateCurrentUser(): any {
-    this.getInfoUser(this.currentUser.username).subscribe(
-      (next: IUser) => {
-        this.currentUser = next;
-
-        // Next userSource
-        this.tokenSr.saveUser(next);
-      }
-    );
   }
 
 
@@ -59,7 +93,7 @@ export class UserService {
   // Update newest user's Information from Server
   updateNewUser(username?: string): Observable<boolean | any> {
     if (!username) {
-      username = this.getCurrentUser()?.username;
+      username = this.currentUser?.username;
     }
     return this.getInfoUser(username).pipe(
       map(next => next),
@@ -81,16 +115,9 @@ export class UserService {
     );
   }
 
-  /*  // Get user's information by ID
-    getInfoUserByID(ID: string): Observable<IUser> {
-      return this.http.get<any>(API_URL + 'user/' + ID, httpOptions).pipe(
-        map(ele => ele.data?.user)
-      );
-    }*/
-
   // Update user's information
   updateInfoUser(payload: any): Observable<any> {
-    const ID = this.getCurrentUser()?._id;
+    const ID = this.currentUser?._id;
     return this.http.put(API_URL + 'settings/editProfile/' + ID, {
       name: payload.name,
       username: payload.username,
@@ -145,25 +172,30 @@ export class UserService {
     );
   }
 
+  // Get Followers of an user
   getFollowers(payload: any): Observable<IUser[]> {
-    const username = !!payload ? payload : this.getCurrentUser().username;
+    const username = !!payload ? payload : this.currentUser.username;
     return this.http.get<any>(API_URL + 'getDetailFollow/' + username).pipe(
       map(res => res.data.result[0].followers),
       delay(50)
     );
   }
 
+  // Get Following of an user
   getFollowing(payload: string): Observable<IUser[]> {
-    const username = !!payload ? payload : this.getCurrentUser().username;
+    const username = !!payload ? payload : this.currentUser.username;
     return this.http.get<any>(API_URL + 'getDetailFollow/' + username).pipe(
       map(res => res.data.result[0].following),
       delay(50)
     );
   }
 
-  // Update Avatar
+
+  /*
+    Update Avatar
+  */
   updateAvatar(avatarForm: FormData): Observable<HttpEvent<any>> {
-    const api = API_URL + 'profile/updateAvatar/' + this.getCurrentUser()?._id;
+    const api = API_URL + 'profile/updateAvatar/' + this.currentUser?._id;
     console.log(api);
     console.log(avatarForm);
     return this.http.put(api, avatarForm, {

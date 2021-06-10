@@ -8,7 +8,7 @@ import {IUser} from '@shared/models';
   providedIn: 'root'
 })
 export class OwnerGuard implements CanActivate, CanDeactivate<unknown> {
-  private curUser: IUser = this.userSr.getCurrentUser();
+  private curUser: IUser = this.userSr.currentUser;
 
   constructor(private userSr: UserService, private router: Router) {
   }
@@ -21,7 +21,7 @@ export class OwnerGuard implements CanActivate, CanDeactivate<unknown> {
     if (username === this.curUser.username) {
       return true;
     }
-    this.router.navigate(['404']).then(r => {
+    this.router.navigate(['404']).then(_ => {
     });
     return false;
   }

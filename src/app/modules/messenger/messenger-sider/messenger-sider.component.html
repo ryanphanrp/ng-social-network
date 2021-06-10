@@ -21,6 +21,11 @@
            id="searching-fr-input"
            placeholder="Search friends..." type="text">
   </div>
+<!--  {{ (posts$ | async)?.length }}
+  {{ (conversations$ | async)?.length }}
+  <ul>
+    <li *ngFor="let conversation of conversations$ | async">{{ conversation._id }}</li>
+  </ul>-->
   <ng-container *ngTemplateOutlet="searching ? friendList : listConversation"></ng-container>
 </div>
 
@@ -28,10 +33,11 @@
 <!--List Conversation-->
 <ng-template #listConversation>
   <div class="conversation-list-container">
-    <div *ngFor="let conversation of conversations | async" class="conversation-inline">
+    <div (click)="joinConversation(conversation._id)" *ngFor="let conversation of conversations$ | async"
+         class="conversation-inline">
 
       <!--      Information of Conversation-->
-      <div class="partner-information" (click)="joinConversation(conversation._id)">
+      <div class="partner-information">
         <div class="avatar-block">
           <img alt="" class="avatar" src="{{ (conversation.members | toPartner).avatarUrl }}">
           <div class="status"></div>
@@ -40,7 +46,7 @@
       </div>
 
       <!--      Button - Join conversation-->
-      <button (click)="joinConversation(conversation._id)" class="btn-join">
+      <button class="btn-join">
         <svg fill="none" height="32" viewBox="0 0 40 40" width="32" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M28.16 0C35.24 0 40 4.56 40 11.34V28.68C40 35.458 35.24 40 28.16 40H11.82C4.76 40 0 35.458 0 28.68V11.34C0 4.56 4.76 0 11.82 0H28.16ZM21.7 11.44C21.12 10.86 20.16 10.86 19.58 11.44C19 12.04 19 12.98 19.58 13.58L24.54 18.5H11.84C11 18.5 10.34 19.18 10.34 20C10.34 20.84 11 21.5 11.84 21.5H24.54L19.58 26.44C19.3 26.72 19.14 27.12 19.14 27.5C19.14 27.878 19.3 28.26 19.58 28.56C20.16 29.14 21.12 29.14 21.7 28.56L29.24 21.06C29.8 20.5 29.8 19.5 29.24 18.94L21.7 11.44Z"

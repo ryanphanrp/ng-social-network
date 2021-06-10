@@ -2,7 +2,7 @@
 
   <!--  Header of Conversation-->
   <div class="header">
-    <div class="avatar-block">
+    <div class="avatar-block" (click)="onClick()">
       <img alt="" class="avatar" src="{{ partner?.avatarUrl }}">
       <div class="status"></div>
     </div>
@@ -21,7 +21,7 @@
 
   <!--  List messages in conversation-->
   <div class="main">
-    <ng-container *ngFor="let message of messages$ | async">
+    <ng-container *ngFor="let message of messagesList">
       <div class="message-inline">
         <div
           [ngClass]="[message.msg !== emoji ? 'content' : 'like', message.senderId === curUser._id ? 'me' : 'partner']"

@@ -20,6 +20,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MessengerService} from '@core/_services';
 
 const materialModules = [
   MatSidenavModule,
@@ -46,7 +47,7 @@ const configSocket: SocketIoConfig = {url: environment.API_URL, options: {}};
     materialModules,
     SharedModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, MessengerService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

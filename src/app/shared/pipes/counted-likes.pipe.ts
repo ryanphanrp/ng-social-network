@@ -8,7 +8,7 @@ import {IUser} from '@shared/models';
   pure: false
 })
 export class CountedLikesPipe implements PipeTransform {
-  curUser: IUser = this.userSr.getCurrentUser();
+  curUser: IUser = this.userSr.currentUser;
   friends: IUser[] = [];
 
   constructor(

@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     ).subscribe(
       (next: IUser) => {
         this.user = next;
-        this.isMe = next.username === this.userService.getCurrentUser().username;
+        this.isMe = next.username === this.userService.currentUser.username;
       },
       (error: any) => {
         console.log('loi roi');

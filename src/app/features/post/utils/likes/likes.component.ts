@@ -11,7 +11,7 @@ import {DialogService} from '@features/dialog/dialog.service';
 })
 export class LikesComponent implements OnInit {
   isLiked = false;
-  curUser: IUser = this.userSr.getCurrentUser();
+  curUser: IUser = this.userSr.currentUser;
   @Input() postID = '';
   @Input() Likes: string[] = [];
 

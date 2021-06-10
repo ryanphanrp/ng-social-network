@@ -18,11 +18,11 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const auth = this.tokenSr.getToken();
-    const currentUser = this.userSr.getCurrentUser();
+    const currentUser = this.userSr.getCurrentUserInStorage();
     if (!!auth && !!currentUser) {
       return true;
     }
-    this.router.navigate(['auth']).then(r => {
+    this.router.navigate(['auth']).then(_ => {
     });
     return false;
   }

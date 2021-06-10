@@ -18,9 +18,10 @@ export class MessageListComponent implements OnInit {
   content = '';
   conversationID = '';
   partner!: IUser;
-  curUser: IUser = this.userSr.getCurrentUser();
+  curUser: IUser = this.userSr.currentUser;
   color = '#3498db';
   emoji = '👍';
+  messagesList: IMessage[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,6 +30,7 @@ export class MessageListComponent implements OnInit {
     private dialogSr: DialogService,
     private router: Router
   ) {
+    this.getMessage();
   }
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class MessageListComponent implements OnInit {
     ).subscribe(
       (res: any) => {
         this.messages$ = of(res.messages);
+        this.messagesList = res.messages;
         this.partner = toPartner(res.conversation, this.curUser._id);
       },
       (error: any) => {
@@ -56,11 +59,21 @@ export class MessageListComponent implements OnInit {
   */
   sendMessage(): void {
     if (!!this.content.trim()) {
-      this.messengerSr.sendMessageAPI({ID: this.conversationID, content: this.content}).subscribe(
-        res => console.log(res)
-      );
-      this.content = '';
+      // this.messengerSr.sendMessageAPI({ID: this.conversationID, content: this.content}).subscribe(
+      //   res => console.log(res)
+      // );
+      // this.content = '';
+      const payload = {
+        senderId: this.curUser._id,
+        receiverId: this.partner._id,
+        msg: this.content
+      };
+      this.messengerSr.sendMessage(payload);
     }
+  }
+
+  getMessage(): void {
+    this.messengerSr.getMessage().subscribe(res => console.log(res));
   }
 
   /*
@@ -84,9 +97,8 @@ export class MessageListComponent implements OnInit {
         if (res) {
           this.messengerSr.deleteConversation(this.conversationID).subscribe(
             (_: any) => {
-              this.router.navigate(['.']).then((__: any) => {
-                this.router.navigate(['chat']).then((___: any) => {
-                });
+              this.messengerSr.updateConversations();
+              this.router.navigate(['chat']).then((__: any) => {
               });
             }
           );
@@ -94,6 +106,14 @@ export class MessageListComponent implements OnInit {
       },
       (error: any) => {
         console.log(error);
+      }
+    );
+  }
+
+  onClick(): void {
+    this.messengerSr.getConversations().subscribe(
+      res => {
+        console.log(res);
       }
     );
   }

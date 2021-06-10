@@ -31,7 +31,7 @@ export class EditPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getCurrentUser();
+    this.currentUser = this.userService.currentUser;
     this.data.subscribe(res => {
       this.post = res;
     });
@@ -82,7 +82,7 @@ export class EditPostComponent implements OnInit {
             this.dialogRef.close(true);
         }
       },
-      (err: any) => {
+      (__: any) => {
         this.dialogSr.error('Something went wrong.');
       }
     );

@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import { MessageListComponent } from './message-list/message-list.component';
 import { ActiveFriendsComponent } from './active-friends/active-friends.component';
 import { InboxComponent } from './inbox/inbox.component';
+import {MessengerService} from '@core/_services';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { InboxComponent } from './inbox/inbox.component';
     SharedModule,
     MatDividerModule,
     FormsModule
-  ]
+  ],
+  providers: [MessengerService]
 })
 export class MessengerModule { }
