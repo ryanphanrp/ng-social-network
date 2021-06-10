@@ -15,7 +15,7 @@ import {CarouselComponent, CommentComponent} from '../utils';
   animations: [slideAnimation]
 })
 export class DetailPostComponent implements OnInit {
-  curUser: IUser = this.userSr.getCurrentUser();
+  curUser: IUser = this.userSr.currentUser;
   isLiked = false;
   curIndex = 0;
   hashtagList: string[] = [];

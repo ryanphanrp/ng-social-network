@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 })
 export class MessengerSiderComponent implements OnInit {
 
-  curUser: IUser = this.userSr.getCurrentUser();
+  curUser: IUser = this.userSr.currentUser;
   searching = false;
   keyword = '';
   error = false;

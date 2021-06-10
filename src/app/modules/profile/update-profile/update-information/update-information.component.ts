@@ -14,7 +14,7 @@ const USERNAME_PATTERN = /^[a-zA-Z0-9_-]{3,20}$/;
   styleUrls: ['./update-information.component.scss']
 })
 export class UpdateInformationComponent implements OnInit {
-  curUser: IUser = this.userService.getCurrentUser();
+  curUser: IUser = this.userService.currentUser;
   infoForm!: FormGroup;
 
   constructor(
@@ -64,8 +64,8 @@ export class UpdateInformationComponent implements OnInit {
     this.userService.updateInfoUser(payload).subscribe(
       (_: any) => {
         this.dialogSr.success('Your Information has been updated successfully!');
-        this.userService.updateNewUser(payload.username);
-        this.curUser = this.userService.getCurrentUser();
+        this.userService.updateCurrentUser();
+        this.curUser = this.userService.currentUser;
       },
       (error: any) => {
         console.log(error);

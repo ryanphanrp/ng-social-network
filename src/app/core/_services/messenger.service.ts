@@ -120,10 +120,6 @@ export class MessengerService {
     }, httpOptions).pipe(delay(50));
   }
 
-  sendMessage(payload: any): void {
-    this.socket.emit('sendMessage', payload);
-  }
-
   // Delete message by API
   /* deleteMessageAPI(ID: string): Observable<any> {
      return this.http.delete(AUTH_API + 'deleteAMessage/' + ID, httpOptions).pipe(delay(50));
@@ -133,9 +129,12 @@ export class MessengerService {
   /*
   *   Socket IO
   * */
+  sendMessage(payload: any): void {
+    this.socket.emit('sendMessage', payload);
+  }
 
   getMessage(): Observable<any> {
-    return this.socket.fromEvent('sendMessage');
+    return this.socket.fromEvent('getMessage');
   }
 
   private setConversations(value: IConversation[]): void {

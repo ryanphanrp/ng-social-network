@@ -22,6 +22,8 @@ export class InfoUserComponent implements OnInit {
   postsOfUser!: Observable<IPost[]>;
   @Input() showCounting = false;
 
+  user$ = this.userSr.getCurrentUser();
+
   // Config dimensions for avatar
   avatars = {
     home: {
@@ -39,6 +41,10 @@ export class InfoUserComponent implements OnInit {
     private userSr: UserService,
     private dialogSr: DialogService,
     private authSr: AuthService) {
+    this.user$.subscribe(res => {
+      this.curUser = res;
+      this.initialUser();
+    });
   }
 
   @Input() set profileUser(user: IUser) {
@@ -53,7 +59,9 @@ export class InfoUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.curUser = this.userSr.getCurrentUser();
+  }
+
+  initialUser(): void {
     this.thisUser = {...this.curUser};
     this.username = this.thisUser?.username;
     this.postsOfUser = this.userSr.getPostsUser(this.thisUser?.username);
@@ -112,7 +120,7 @@ export class InfoUserComponent implements OnInit {
    */
   getFollowing(): void {
     this.dialogSr.openInfoDialog('Following', this.userSr.getFollowing(this.thisUser.username)).pipe(
-      switchMap(res => res ? this.userSr.updateNewUser() : res)
+      switchMap(res => res ? this.userSr.updateCurrentUser() : res)
     ).subscribe(
       res => {
         if (res) {
@@ -124,7 +132,7 @@ export class InfoUserComponent implements OnInit {
 
   getFollowers(): void {
     this.dialogSr.openInfoDialog('Followers', this.userSr.getFollowers(this.thisUser.username)).pipe(
-      switchMap(res => res ? this.userSr.updateNewUser() : res)
+      switchMap(res => res ? this.userSr.updateCurrentUser() : res)
     ).subscribe(
       res => {
         if (res) {

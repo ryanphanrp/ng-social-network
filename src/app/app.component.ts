@@ -10,7 +10,7 @@ import {enterAnimations, IUser} from '@shared/models';
 })
 export class AppComponent {
   title = 'Social Network';
-  curUser: IUser = this.userSr.getCurrentUser();
+  curUser: IUser = this.userSr.currentUser;
 
   constructor(
     public userSr: UserService) {

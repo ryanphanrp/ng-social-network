@@ -13,7 +13,7 @@ const PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
-  curUser: IUser = this.userSr.getCurrentUser();
+  curUser: IUser = this.userSr.currentUser;
   pwForm!: FormGroup;
   isShow = false;
   show = {
@@ -54,7 +54,7 @@ export class ChangePasswordComponent implements OnInit {
       (_: any) => {
         this.dialogSr.success('Your password has been changed successfully!');
         this.dialogSr.loading('Waiting for logout in 3 seconds', 3000).subscribe(
-          (_: any) => this.authSr.logOut()
+          (__: any) => this.authSr.logOut()
         );
       }
     );

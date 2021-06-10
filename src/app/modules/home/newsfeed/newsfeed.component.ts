@@ -28,7 +28,7 @@ export class NewsfeedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.curUser = this.userSr.getCurrentUser();
+    this.curUser = this.userSr.currentUser;
     this.getPosts();
   }
 

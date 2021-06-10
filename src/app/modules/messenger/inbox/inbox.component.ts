@@ -9,7 +9,7 @@ import {MessengerService, UserService} from '@core/_services';
 })
 export class InboxComponent implements OnInit {
 
-  curUser: IUser = this.userSr.getCurrentUser();
+  curUser: IUser = this.userSr.currentUser;
   conversations: IConversation[] = [];
 
   constructor(private userSr: UserService,

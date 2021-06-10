@@ -8,7 +8,6 @@ import {DialogService} from '@features/dialog/dialog.service';
 import {AuthService} from '@core/_services/auth.service';
 import {TokenService} from '@core/_services/token.service';
 import {UserService} from '@core/_services';
-import {of} from 'rxjs';
 
 @Component({
   selector: 'app-signin',
@@ -20,7 +19,7 @@ export class SigninComponent implements OnInit {
   signInForm!: FormGroup;
   message = '';
   passwordShow = false;
-  PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{0,}$/;
+  PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).*$/;
 
   constructor(private authService: AuthService,
               private userSr: UserService,
@@ -35,7 +34,7 @@ export class SigninComponent implements OnInit {
     // When logged access login page
     if (this.tokenService.getToken()) {
       console.log('Logged!');
-      this.router.navigateByUrl('/').then(r => {
+      this.router.navigateByUrl('/').then(_ => {
       });
       console.log('Gone!');
     }
@@ -66,9 +65,13 @@ export class SigninComponent implements OnInit {
         this.tokenService.saveToken(next.token);
         this.tokenService.saveUser(next.user);
 
+        // User Service
+        this.userSr.setState(next.user);
+
         // Auth Service
         this.authService.isAuth = true;
-        this.router.navigate(['../']).then(r => {
+        this.router.navigate(['../']).then(_ => {
+          window.location.reload();
         });
 
         // Show notification

@@ -23,8 +23,8 @@ export class HomeSiderComponent implements OnInit {
   }
 
   updateProfile(): void {
-    const username = this.userSr.getCurrentUser().username;
-    this.router.navigate(['profile', username, 'update']).then(r => {});
+    const username = this.userSr.currentUser.username;
+    this.router.navigate(['profile', username, 'update']).then(_ => {});
   }
 
 }

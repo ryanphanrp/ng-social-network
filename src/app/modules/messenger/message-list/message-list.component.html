@@ -21,7 +21,7 @@
 
   <!--  List messages in conversation-->
   <div class="main">
-    <ng-container *ngFor="let message of messages$ | async">
+    <ng-container *ngFor="let message of messagesList">
       <div class="message-inline">
         <div
           [ngClass]="[message.msg !== emoji ? 'content' : 'like', message.senderId === curUser._id ? 'me' : 'partner']"
