@@ -84,9 +84,8 @@ export class MessageListComponent implements OnInit {
         if (res) {
           this.messengerSr.deleteConversation(this.conversationID).subscribe(
             (_: any) => {
-              this.router.navigate(['.']).then((__: any) => {
-                this.router.navigate(['chat']).then((___: any) => {
-                });
+              this.messengerSr.updateConversations();
+              this.router.navigate(['chat']).then((__: any) => {
               });
             }
           );
@@ -94,6 +93,14 @@ export class MessageListComponent implements OnInit {
       },
       (error: any) => {
         console.log(error);
+      }
+    );
+  }
+
+  onClick(): void {
+    this.messengerSr.getConversations().subscribe(
+      res => {
+        console.log(res);
       }
     );
   }

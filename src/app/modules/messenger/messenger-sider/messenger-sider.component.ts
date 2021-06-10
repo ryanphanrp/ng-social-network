@@ -1,8 +1,8 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {IConversation, IUser} from '@shared/models';
-import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {MessengerService, UserService} from '@core/_services';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-messenger-sider',
@@ -16,7 +16,7 @@ export class MessengerSiderComponent implements OnInit {
   keyword = '';
   error = false;
   friends: IUser[] = [];
-  conversations: Observable<IConversation[]> = this.messengerSr.getConversationOfUser();
+  conversations$: Observable<IConversation[]> = this.messengerSr.getConversations();
 
   constructor(
     private userSr: UserService,
@@ -24,6 +24,7 @@ export class MessengerSiderComponent implements OnInit {
     public messengerSr: MessengerService,
     private router: Router
   ) {
+
   }
 
   ngOnInit(): void {

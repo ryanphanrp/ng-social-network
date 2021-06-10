@@ -1,47 +1,77 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {delay, map} from 'rxjs/operators';
+import {delay, distinctUntilChanged, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {IConversation, IMessage} from '@shared/models';
 import {Socket} from 'ngx-socket-io';
 import {environment} from 'src/environments/environment';
 
+
+/*
+Initial Variables
+*/
 const AUTH_API = environment.API_URL;
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
 
+const initialState: IConversation[] = [];
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class MessengerService {
 
+  private conversationsData$: BehaviorSubject<IConversation[]>;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private socket: Socket) {
+    this.conversationsData$ = new BehaviorSubject<IConversation[]>(initialState);
+    this.initialConversations();
   }
 
-  // Get all Conversation
-  getAllConversation(): Observable<IConversation[]> {
-    return this.http.get<any>(AUTH_API + 'getAllConversation', httpOptions).pipe(
-      map(res => res.data.GetAllConversation),
-      delay(50));
+
+  /*
+  *  State Conversation Management
+  * */
+
+  get conversations(): IConversation[] {
+    return this.conversationsData$.value;
   }
 
-  // add new Conversation
-  addNewConversation(ID: string): Observable<any> {
-    return this.http.post(AUTH_API + 'addNewConversation', {
-      _id: ID
-    }, httpOptions).pipe(delay(50));
+  getConversations(): Observable<IConversation[]> {
+    console.log('get - conversations');
+    return this.conversationsData$.asObservable().pipe(distinctUntilChanged());
   }
 
+  updateConversations(): void {
+    console.log('update conversation');
+    this.getConversationOfUser().subscribe(
+      (res: any) => {
+        this.setConversations(res);
+      }
+    );
+  }
+
+  public initialConversations(): void {
+    this.getConversationOfUser().subscribe(
+      (res: any) => {
+        this.setConversations(res);
+      }
+    );
+  }
+
+  // Join to conversation
   joinConversation(ID: string): void {
     this.addNewConversation(ID).subscribe(
       res => {
         console.log(res);
+        this.updateConversations();
         this.router.navigate(['chat', res.data.newConversation._id]).then(_ => {
         });
       },
@@ -51,6 +81,17 @@ export class MessengerService {
         });
       }
     );
+  }
+
+
+  /*
+  *   ALl function - call API
+  * */
+  // add new Conversation
+  addNewConversation(ID: string): Observable<any> {
+    return this.http.post(AUTH_API + 'addNewConversation', {
+      _id: ID
+    }, httpOptions).pipe(delay(50));
   }
 
   // Delete conversation
@@ -79,22 +120,27 @@ export class MessengerService {
     }, httpOptions).pipe(delay(50));
   }
 
-  // Delete message by API
-  deleteMessageAPI(ID: string): Observable<any> {
-    return this.http.delete(AUTH_API + 'deleteAMessage/' + ID, httpOptions).pipe(delay(50));
+  sendMessage(payload: any): void {
+    this.socket.emit('sendMessage', payload);
   }
+
+  // Delete message by API
+  /* deleteMessageAPI(ID: string): Observable<any> {
+     return this.http.delete(AUTH_API + 'deleteAMessage/' + ID, httpOptions).pipe(delay(50));
+   }*/
 
 
   /*
   *   Socket IO
   * */
 
-  sendMessage(payload: any): void {
-    this.socket.emit('sendMessage', payload);
-  }
-
   getMessage(): Observable<any> {
     return this.socket.fromEvent('sendMessage');
+  }
+
+  private setConversations(value: IConversation[]): void {
+    console.log('set conversations' + value.length);
+    this.conversationsData$.next(value);
   }
 
 }
