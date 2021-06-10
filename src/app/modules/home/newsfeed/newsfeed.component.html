@@ -29,7 +29,10 @@
            [scrollWindow]="true"
            infiniteScroll>
         <ng-container *ngFor="let post of posts">
-          <app-card-post (isDeleted)="handleDeletePost($event)" [setData]="post"></app-card-post>
+          <app-card-post
+            (isDeleted)="handleDeletePost($event)"
+            (isEdit)="handleEditPost($event)"
+            [setData]="post"></app-card-post>
         </ng-container>
       </div>
     </div>

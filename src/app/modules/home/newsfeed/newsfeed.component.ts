@@ -2,7 +2,6 @@ import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {IPost, IUser} from '@shared/models';
 import {PostService, UserService} from '@core/_services';
 import {NewPostComponent} from '@features/post/new-post/new-post.component';
-import {DialogService} from '@features/dialog/dialog.service';
 import {NewPostService} from '@features/post/new-post.service';
 
 @Component({
@@ -38,7 +37,7 @@ export class NewsfeedComponent implements OnInit {
   * */
   openDialog(): void {
     this.newPost.openNewPostDialog().subscribe(
-      (next: boolean) => {
+      (_: boolean) => {
         this.getPosts();
         this.cdRef.markForCheck();
       }
@@ -70,6 +69,9 @@ export class NewsfeedComponent implements OnInit {
     this.postSr.getSubPost().subscribe((res: IPost[]) => this.posts = res);
   }
 
+  /*
+    Handle Event Emitter
+  */
   handleDeletePost(ID: string): void {
     this.postSr.deletePost(ID).subscribe(
       (_: any) => {
@@ -77,6 +79,16 @@ export class NewsfeedComponent implements OnInit {
       },
       (err: any) => {
         console.log(err.error.message);
+      }
+    );
+  }
+
+  handleEditPost(ID: string): void {
+    this.postSr.getSinglePost(ID).subscribe(
+      (res: IPost) => {
+        this.posts = this.posts.map(
+          ele => ele._id === ID ? res : ele
+        );
       }
     );
   }

@@ -15,6 +15,7 @@ export class CardPostComponent implements OnInit {
   curUser: IUser = this.userSr.getCurrentUser();
   isLiked = false;
   @Output() isDeleted = new EventEmitter<string>();
+  @Output() isEdit = new EventEmitter<string>();
   hashtagList: string[] = [];
   @Input() option = true;
 
@@ -60,6 +61,24 @@ export class CardPostComponent implements OnInit {
       (cfm: any) => {
         if (cfm) {
           this.isDeleted.emit(this.data?._id);
+        }
+      }
+    );
+  }
+
+  /*
+    Edit Post
+  */
+  openEditPost(): void {
+    this.newPost.openEditPostDialog(this.data._id).subscribe(
+      (res: any) => {
+        if (res) {
+          this.isEdit.emit(this.data._id);
+          this.postSr.getSinglePost(this.data._id).subscribe(
+            (data: IPost) => {
+              this.data = data;
+            }
+          );
         }
       }
     );

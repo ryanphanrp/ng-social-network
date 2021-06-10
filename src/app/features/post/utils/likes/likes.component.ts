@@ -23,6 +23,7 @@ export class LikesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLiked = this.Likes.includes(this.curUser._id) as boolean;
   }
 
   /*

@@ -22,7 +22,7 @@
           <span>Report</span>
         </button>
 
-        <button (click)="newPost.openEditPostDialog(data._id)"
+        <button (click)="openEditPost()"
                 *ngIf="curUser._id === data.postedBy._id"
                 mat-menu-item>
           <mat-icon>edit</mat-icon>
