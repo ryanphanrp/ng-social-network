@@ -14,7 +14,7 @@ const USERNAME_PATTERN = /^[a-zA-Z0-9_-]{3,20}$/;
   styleUrls: ['./update-information.component.scss']
 })
 export class UpdateInformationComponent implements OnInit {
-  curUser: IUser = this.userService.currentUser;
+  curUser!: IUser;
   infoForm!: FormGroup;
 
   constructor(
@@ -23,6 +23,11 @@ export class UpdateInformationComponent implements OnInit {
     private fb: FormBuilder,
     private authSr: AuthService,
     private dialogSr: DialogService) {
+    userService.getCurrentUser().subscribe(
+      (res: IUser) => {
+        this.curUser = res;
+      }
+    );
   }
 
   ngOnInit(): void {

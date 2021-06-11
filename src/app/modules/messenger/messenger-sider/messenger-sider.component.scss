@@ -5,7 +5,25 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  @include responsiveSider;
+
+
+  @include desktop {
+    width: $siderSize * 1.5;
+  }
+
+  @include tablet {
+    margin-top: 50px;
+    width: 90px;
+  }
+
+  .head {
+    @include mobile {
+      display: none;
+    }
+    @include tablet {
+      display: none;
+    }
+  }
 
   // Owner block
   .owner-block {
@@ -58,21 +76,34 @@
     @include customScrollbar();
 
     .conversation-inline {
-      @apply w-full py-2 my-1 pl-4 pr-8 rounded-lg cursor-pointer;
+      @apply w-auto py-2 my-1 pl-4 pr-8 rounded-lg cursor-pointer;
       @apply bg-gray-100 bg-opacity-75;
       @apply flex justify-between items-center;
 
+      @include tablet {
+        @apply p-2;
+      }
+
       .partner-information {
+        padding: 0 0;
+        margin: 0 0;
         @include alignCenter;
         @include friendBlock();
       }
-
 
       .btn-join {
         right: 0;
         @apply rounded-xl shadow-lg;
         position: relative;
         animation: bounce 2s infinite;
+
+        @include tablet {
+          display: none;
+        }
+
+        @include mobile {
+          display: none;
+        }
 
         svg {
           position: absolute;

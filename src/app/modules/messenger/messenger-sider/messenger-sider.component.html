@@ -1,11 +1,15 @@
 <div class="messenger-sider-container">
-  <app-brand></app-brand>
 
-  <div [routerLink]="['./']" class="owner-block">
-    <img [src]="curUser.avatarUrl" alt="" class="avatar">
-    <div class="username">{{ curUser.username }}</div>
+  <!--Head-->
+  <div class="head">
+    <app-brand></app-brand>
+    <div [routerLink]="['./']" class="owner-block">
+      <img [src]="curUser.avatarUrl" alt="" class="avatar">
+      <div class="username">{{ curUser.username }}</div>
+    </div>
+    <mat-divider></mat-divider>
   </div>
-  <mat-divider></mat-divider>
+
 
   <!--  Searching input-->
   <div class="search-user-block">
@@ -21,11 +25,6 @@
            id="searching-fr-input"
            placeholder="Search friends..." type="text">
   </div>
-<!--  {{ (posts$ | async)?.length }}
-  {{ (conversations$ | async)?.length }}
-  <ul>
-    <li *ngFor="let conversation of conversations$ | async">{{ conversation._id }}</li>
-  </ul>-->
   <ng-container *ngTemplateOutlet="searching ? friendList : listConversation"></ng-container>
 </div>
 

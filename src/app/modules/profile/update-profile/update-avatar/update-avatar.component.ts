@@ -152,7 +152,7 @@ export class UpdateAvatarComponent implements OnInit {
           case HttpEventType.Response:
             this.isLoading = false;
             this.dialogSr.success('A new post has been created successfully!');
-            this.userSr.updateUserInLocal(event.body.data.infoUser);
+            this.userSr.updateCurrentUser();
             this.dialogRef.close(true);
         }
       },

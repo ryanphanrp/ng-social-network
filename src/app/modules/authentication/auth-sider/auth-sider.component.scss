@@ -7,4 +7,8 @@
   img {
     height: 100%;
   }
+
+  @include tablet {
+    display: none;
+  }
 }
