@@ -6,11 +6,25 @@
 
   .conversation-container {
     @apply h-full w-3/4;
+
+    @include tablet {
+      @apply w-full;
+    }
+
+    @include mobile {
+      @apply w-full;
+    }
   }
 
   .friends-active-container {
     @apply h-full w-1/4 p-2 overflow-hidden border-l border-gray-800;
     @apply flex flex-col;
+    @include mobile {
+      display: none;
+    }
+    @include tablet {
+      display: none;
+    }
 
     .title {
       @apply text-lg font-semibold tracking-widest mb-4;

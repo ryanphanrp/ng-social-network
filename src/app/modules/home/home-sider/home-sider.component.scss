@@ -6,6 +6,10 @@
   overflow-y: hidden;
   @include responsiveSider;
 
+  @include tablet {
+    display: none;
+  }
+
   .bottom-home-sider {
     @apply flex flex-col justify-center;
 

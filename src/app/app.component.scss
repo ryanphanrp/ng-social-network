@@ -9,6 +9,71 @@
   margin: 0;
   display: flex;
 
+  /* Navbar */
+  .nav-bar {
+    width: 100%;
+    z-index: 999;
+    position: fixed;
+    background: white;
+    border-bottom: 1px solid $borderGray;
+    @apply flex items-center justify-between px-4;
+
+    //Brand Name
+    .brand {
+      display: flex;
+      @include alignCenter;
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .brand-name {
+        font-size: 20px;
+        block-size: fit-content;
+      }
+    }
+
+    //Navigation
+    .menu-direction {
+      @include alignCenter;
+
+      .btn {
+        @apply mr-6;
+      }
+
+      .profile-block {
+        display: block;
+        border: 1px solid $borderGray;
+        border-radius: 50%;
+        padding: 1px 1px;
+
+        .avatar {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+        }
+      }
+    }
+
+
+    // Media Queries
+    @include desktop {
+      display: none;
+    }
+
+    @include fullHD {
+      display: none;
+    }
+
+    @include tablet {
+      margin: 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+
   /*
   Sider
   */
@@ -23,10 +88,6 @@
     @include mobile {
       display: none;
     }
-
-    @include tablet {
-      display: none;
-    }
   }
 
   /*
@@ -39,65 +100,6 @@
     align-items: center;
     flex-direction: column;
     overflow-y: scroll;
-
-    /* Navbar */
-    .nav-bar {
-      width: 100%;
-      z-index: 999;
-      position: fixed;
-      background: white;
-      border-bottom: 1px solid $borderGray;
-      @apply flex items-center justify-between px-4;
-
-      //Brand Name
-      .brand {
-        display: flex;
-        @include alignCenter;
-
-        .brand-name {
-          font-size: 20px;
-          block-size: fit-content;
-        }
-      }
-
-      //Navigation
-      .menu-direction {
-        @include alignCenter;
-
-        .btn {
-          @apply mr-6;
-        }
-
-        .profile-block {
-          display: block;
-          border: 1px solid $borderGray;
-          border-radius: 50%;
-          padding: 1px 1px;
-
-          .avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-          }
-        }
-      }
-
-
-      // Media Queries
-      @include desktop {
-        display: none;
-      }
-
-      @include fullHD {
-        display: none;
-      }
-
-      @include tablet {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-      }
-    }
 
     /* Router Outlet */
     .outlet {

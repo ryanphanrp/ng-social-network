@@ -3,4 +3,8 @@
 .profile-sider {
   height: 100%;
   @include responsiveSider;
+
+  @include tablet {
+    display: none;
+  }
 }
