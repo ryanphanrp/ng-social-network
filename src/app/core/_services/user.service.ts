@@ -5,6 +5,7 @@ import {IPost, IUser} from '@shared/models';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {TokenService} from '@core/_services/token.service';
+import {Socket} from 'ngx-socket-io';
 
 const API_URL = environment.API_URL;
 
@@ -34,6 +35,7 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
+    private socket: Socket,
     private tokenSr: TokenService) {
     this.currentUser$ = new BehaviorSubject<IUser>(initialState);
     this.initialCurrentUser();
@@ -67,6 +69,14 @@ export class UserService {
         this.tokenSr.saveUser(next);
       }
     );
+  }
+
+/*
+  Socket IO
+*/
+  addUser(): void {
+    const userID = this.getCurrentUserInStorage()._id;
+    this.socket.emit('addUser', userID);
   }
 
 

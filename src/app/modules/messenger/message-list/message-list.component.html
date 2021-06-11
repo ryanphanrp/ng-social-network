@@ -23,9 +23,18 @@
   <div class="main">
     <ng-container *ngFor="let message of messagesList">
       <div class="message-inline">
+        <img *ngIf="message.senderId !== curUser._id"
+             class="avatar"
+             [matTooltipPosition]="'left'"
+             matTooltip="{{ partner.name }}"
+             src="{{ partner.avatarUrl }}" alt="">
         <div
           [ngClass]="[message.msg !== emoji ? 'content' : 'like', message.senderId === curUser._id ? 'me' : 'partner']"
-          [style]="message.senderId === curUser._id && message.msg !== emoji ? {'background': color} : {}">{{message.msg}}</div>
+          matTooltip="{{ message.Date | timeAgo }}"
+          [matTooltipPosition]="'right'"
+          [style]="message.senderId === curUser._id && message.msg !== emoji ? {'background': color} : {}">
+          {{message.msg}}
+        </div>
       </div>
     </ng-container>
   </div>

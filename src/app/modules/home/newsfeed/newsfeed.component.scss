@@ -97,7 +97,6 @@
   Main Newsfeed
   */
   .main-newsfeed {
-    width: 100%;
     @include mediaQueryNewsFeed();
 
     //New Post

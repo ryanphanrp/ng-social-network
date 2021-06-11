@@ -1,5 +1,3 @@
-{{ (user$ | async)?.username }}
-
 <!-- Avatar, username and name-->
 <div (click)="navigateThisUser()" [ngClass]="isProfilePage ? 'info-container-profile' : 'info-container-home'"
      class="info-container">
@@ -73,6 +71,6 @@
 
 <!--Show Bio & name in profile page-->
 <div *ngIf="isProfilePage" class="name-bio-container">
-  <div class="name">{{ (user$ | async)?.name }}</div>
-  <div class="bio">{{ (user$ | async)?.bio }}</div>
+  <div class="name">{{ curUser?.name }}</div>
+  <div class="bio">{{ curUser?.bio }}</div>
 </div>
