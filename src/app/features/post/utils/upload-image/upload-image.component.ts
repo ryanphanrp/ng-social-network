@@ -69,7 +69,7 @@ export class UploadImageComponent implements OnInit {
   }
 
   cropperReady(sourceImageDimensions: Dimensions): void {
-    // console.log('Cropper ready', sourceImageDimensions);
+    console.log('Cropper ready', sourceImageDimensions);
   }
 
   loadImageFailed(): void {
@@ -181,6 +181,7 @@ export class UploadImageComponent implements OnInit {
   // Delete Image in List Cropped Images
   deleteThisImage(img: any): void {
     this.listCroppedImage = this.listCroppedImage.filter(ele => ele !== img);
+    this.emitToParent();
   }
 
 
