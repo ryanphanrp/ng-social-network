@@ -6,6 +6,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {IConversation, IMessage} from '@shared/models';
 import {Socket} from 'ngx-socket-io';
 import {environment} from 'src/environments/environment';
+import {UserService} from '@core/_services/user.service';
 
 
 /*
@@ -30,6 +31,7 @@ export class MessengerService {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private userSr: UserService,
     private socket: Socket) {
     this.conversationsData$ = new BehaviorSubject<IConversation[]>(initialState);
     this.initialConversations();

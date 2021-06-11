@@ -21,23 +21,32 @@
     @include customScrollbar(false, 10px);
 
     .message-inline {
-      @apply w-full my-1 flex;
+      @apply w-full my-1 flex items-center;
 
+      // Avatar
+      .avatar {
+        @apply h-6 w-6 rounded-full mr-1;
+      }
+
+      // Text messages
       .content {
         max-width: 50%;
         @apply px-3 py-1 text-base break-words rounded-2xl;
         animation: all 0.5s ease-in-out;
       }
 
+      // Current user
       .me {
         @apply text-white ml-auto;
         animation: all 0.5s ease-in-out;
       }
 
+      // Partner
       .partner {
-        @apply border border-gray-700;
+        @apply border border-gray-700 mr-auto;
       }
 
+      // Emoji
       .like {
         @apply text-6xl bg-white border-0;
       }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {enterAnimations, IMessage, IUser, toPartner} from '@shared/models';
+import {enterAnimations, IMessage, IUser, toMessage, toPartner} from '@shared/models';
 import {MessengerService, UserService} from '@core/_services';
 import {DialogService} from '@features/dialog/dialog.service';
 
@@ -59,21 +59,21 @@ export class MessageListComponent implements OnInit {
   */
   sendMessage(): void {
     if (!!this.content.trim()) {
-      // this.messengerSr.sendMessageAPI({ID: this.conversationID, content: this.content}).subscribe(
-      //   res => console.log(res)
-      // );
-      // this.content = '';
-      const payload = {
+      this.messengerSr.sendMessage({
         senderId: this.curUser._id,
         receiverId: this.partner._id,
         msg: this.content
-      };
-      this.messengerSr.sendMessage(payload);
+      });
+      this.messengerSr.sendMessageAPI({ID: this.conversationID, content: this.content}).subscribe();
+      this.messagesList.push({...toMessage(this.conversationID, this.content, this.curUser._id)});
+      this.content = '';
     }
   }
 
   getMessage(): void {
-    this.messengerSr.getMessage().subscribe(res => console.log(res));
+    this.messengerSr.getMessage().subscribe(res => {
+      this.messagesList.push({...toMessage(this.conversationID, res.msg, res.senderId)});
+    });
   }
 
   /*
