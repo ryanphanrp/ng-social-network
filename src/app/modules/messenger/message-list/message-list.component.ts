@@ -57,32 +57,32 @@ export class MessageListComponent implements OnInit {
   /*
     Send Messages
   */
-  sendMessage(): void {
+  sendText(): void {
     if (!!this.content.trim()) {
-      this.messengerSr.sendMessage({
-        senderId: this.curUser._id,
-        receiverId: this.partner._id,
-        msg: this.content
-      });
-      this.messengerSr.sendMessageAPI({ID: this.conversationID, content: this.content}).subscribe();
-      this.messagesList.push({...toMessage(this.conversationID, this.content, this.curUser._id)});
+      this.sendMessage(this.content);
       this.content = '';
     }
+  }
+
+  // When click Like Button
+  sendLike(): void {
+    this.sendMessage(this.emoji);
+  }
+
+  sendMessage(content: string): void {
+    this.messengerSr.sendMessage({
+      senderId: this.curUser._id,
+      receiverId: this.partner._id,
+      msg: content
+    });
+    this.messengerSr.sendMessageAPI({ID: this.conversationID, content}).subscribe();
+    this.messagesList.push({...toMessage(this.conversationID, content, this.curUser._id)});
   }
 
   getMessage(): void {
     this.messengerSr.getMessage().subscribe(res => {
       this.messagesList.push({...toMessage(this.conversationID, res.msg, res.senderId)});
     });
-  }
-
-  /*
-    When click Like Button
-  */
-  sendLike(): void {
-    this.messengerSr.sendMessageAPI({ID: this.conversationID, content: this.emoji}).subscribe(
-      res => console.log(res)
-    );
   }
 
   /*
