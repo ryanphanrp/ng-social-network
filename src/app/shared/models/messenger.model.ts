@@ -11,7 +11,7 @@ export interface IMessage {
   conversationId: string;
   msg: string;
   senderId: string;
-  Date?: string;
+  Date: string;
 }
 
 export function toPartner(conversation: IConversation, ID: string): IUser {
@@ -23,6 +23,7 @@ export function toMessage(ID: string, content: string, sender: string): IMessage
     _id: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
     conversationId: ID,
     msg: content,
-    senderId: sender
+    senderId: sender,
+    Date: Date.now().toString()
   };
 }
