@@ -2,7 +2,10 @@
   <div class="header-card">
     <!-- Owner-->
     <div [routerLink]="['../../profile', data.postedBy.username]" class="owner-post">
-      <div class="avatar-block">
+      <div class="avatar-block"
+           matTooltip="{{ data.postedBy.name }}"
+           [matTooltipPosition]="'before'"
+      >
         <img alt="" src="{{ data.postedBy.avatarUrl }}">
       </div>
       <div class="user-profile">

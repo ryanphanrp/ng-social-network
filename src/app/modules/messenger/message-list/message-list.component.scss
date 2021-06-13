@@ -11,6 +11,10 @@
 
     .options {
       margin-left: auto;
+
+      button {
+        display: flex;
+      }
     }
   }
 
@@ -98,3 +102,12 @@
     }
   }
 }
+
+::ng-deep .mat-menu-panel {
+  width: 100% !important;
+  
+  .delete {
+    color: red;
+  }
+}
+

@@ -12,18 +12,22 @@ import { ActiveFriendsComponent } from './active-friends/active-friends.componen
 import { InboxComponent } from './inbox/inbox.component';
 import {MessengerService} from '@core/_services';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [MessengerComponent, MessengerSiderComponent, MessageListComponent, ActiveFriendsComponent, InboxComponent],
-    imports: [
-        CommonModule,
-        MessengerRoutingModule,
-        SharedModule,
-        MatDividerModule,
-        FormsModule,
-        MatTooltipModule
-    ],
+  imports: [
+    CommonModule,
+    MessengerRoutingModule,
+    SharedModule,
+    MatDividerModule,
+    FormsModule,
+    MatTooltipModule,
+    MatMenuModule,
+    MatIconModule
+  ],
   providers: [MessengerService]
 })
 export class MessengerModule { }

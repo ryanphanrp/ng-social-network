@@ -24,6 +24,6 @@ export function toMessage(ID: string, content: string, sender: string): IMessage
     conversationId: ID,
     msg: content,
     senderId: sender,
-    Date: Date.now().toString()
+    Date: new Date().toISOString()
   };
 }

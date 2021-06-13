@@ -11,6 +11,10 @@
     width: $siderSize * 1.5;
   }
 
+  @include fullHD {
+    width: $siderSize;
+  }
+
   @include tablet {
     margin-top: 50px;
     width: 90px;

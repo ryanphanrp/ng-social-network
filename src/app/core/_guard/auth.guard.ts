@@ -21,6 +21,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
     const currentUser = this.userSr.getCurrentUserInStorage();
     if (!!auth && !!currentUser) {
       this.userSr.addUser();
+      this.userSr.updateCurrentUser();
       return true;
     }
     this.router.navigate(['auth']).then(_ => {

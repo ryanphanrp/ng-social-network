@@ -22,7 +22,11 @@ export class ModalComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public value: { title: string, value: Observable<IUser[]> }) {
-    this.curUser = userSr.currentUser;
+    userSr.getCurrentUser().subscribe(
+      (res: IUser) => {
+        this.curUser = res;
+      }
+    );
   }
 
   ngOnInit(): void {

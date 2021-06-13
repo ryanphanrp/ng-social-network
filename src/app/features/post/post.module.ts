@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {CarouselComponent, CommentComponent, HashtagChipComponent, LikesComponent, UploadImageComponent} from '@features/post/utils';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const materialModules = [
   MatChipsModule,
@@ -49,14 +50,15 @@ const utilComponents = [
     EditPostComponent,
     utilComponents
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    ImageCropperModule,
-    FormsModule,
-    materialModules
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        ImageCropperModule,
+        FormsModule,
+        materialModules,
+        MatTooltipModule
+    ],
   exports: [
     CardPostComponent,
     ListPostComponent
