@@ -48,11 +48,18 @@ export class UpdateInformationComponent implements OnInit {
 
   // Open Update Avatar Dialog
   openUpdateAvatarDialog(event: any): void {
-    this.dialog.open(UpdateAvatarComponent, {
+    const dialogRef = this.dialog.open(UpdateAvatarComponent, {
       height: '33vw',
       width: '30vw',
       data: event
     });
+    dialogRef.afterClosed().subscribe(
+      (res: any) => {
+        if (res) {
+          this.dialogSr.loading('Please wait for some second to change avatar', 3000);
+        }
+      }
+    );
   }
 
   /* Submit form to update information */

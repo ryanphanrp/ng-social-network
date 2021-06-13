@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IPost, IUser} from '@shared/models';
 import {UserService} from '@core/_services/user.service';
-import {switchMap} from 'rxjs/operators';
 import {AuthService} from '@core/_services/auth.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
@@ -43,13 +42,15 @@ export class InfoUserComponent implements OnInit {
     private authSr: AuthService) {
     this.user$.subscribe(res => {
       this.curUser = res;
-      this.initialUser();
+      if (!this.isProfilePage) {
+        this.initialUser();
+      }
     });
   }
 
   @Input() set profileUser(user: IUser) {
     this.isProfilePage = true;
-    if (!!user && user.username !== this.thisUser.username) {
+    if (!!user && (user.username !== this.thisUser.username)) {
       console.log('Difference User from current user.');
       this.thisUser = user;
       this.isMe = false;
@@ -80,7 +81,7 @@ export class InfoUserComponent implements OnInit {
         this.isFollowed = true;
         this.thisUser.followers?.push(this.curUser?._id);
         this.curUser.following?.push(this.thisUser?._id);
-        this.userSr.updateUserInLocal(this.curUser);
+        this.userSr.updateCurrentUser();
       },
       (error: any) => {
         console.log(error);
@@ -95,7 +96,7 @@ export class InfoUserComponent implements OnInit {
         this.isFollowed = false;
         this.thisUser.followers = this.thisUser.followers?.filter(ele => ele !== this.curUser?._id);
         this.curUser.following = this.curUser?.following?.filter(ele => ele !== this.thisUser?._id);
-        this.userSr.updateUserInLocal(this.curUser);
+        this.userSr.updateCurrentUser();
       },
       (error: any) => {
         console.log(error);
@@ -119,24 +120,20 @@ export class InfoUserComponent implements OnInit {
    * Show list following & followers
    */
   getFollowing(): void {
-    this.dialogSr.openInfoDialog('Following', this.userSr.getFollowing(this.thisUser.username)).pipe(
-      switchMap(res => res ? this.userSr.updateCurrentUser() : res)
-    ).subscribe(
-      res => {
+    this.dialogSr.openInfoDialog('Following', this.userSr.getFollowing(this.thisUser.username)).subscribe(
+      (res: boolean) => {
         if (res) {
-          this.ngOnInit();
+          this.userSr.updateCurrentUser();
         }
       }
     );
   }
 
   getFollowers(): void {
-    this.dialogSr.openInfoDialog('Followers', this.userSr.getFollowers(this.thisUser.username)).pipe(
-      switchMap(res => res ? this.userSr.updateCurrentUser() : res)
-    ).subscribe(
-      res => {
+    this.dialogSr.openInfoDialog('Followers', this.userSr.getFollowers(this.thisUser.username)).subscribe(
+      (res: boolean) => {
         if (res) {
-          this.ngOnInit();
+          this.userSr.updateCurrentUser();
         }
       }
     );

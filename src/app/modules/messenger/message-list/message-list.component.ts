@@ -77,11 +77,13 @@ export class MessageListComponent implements OnInit {
     });
     this.messengerSr.sendMessageAPI({ID: this.conversationID, content}).subscribe();
     this.messagesList.push({...toMessage(this.conversationID, content, this.curUser._id)});
+    this.scrollToEnd();
   }
 
   getMessage(): void {
     this.messengerSr.getMessage().subscribe(res => {
       this.messagesList.push({...toMessage(this.conversationID, res.msg, res.senderId)});
+      this.scrollToEnd();
     });
   }
 
@@ -108,6 +110,15 @@ export class MessageListComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  scrollToEnd(): void {
+    setTimeout(() => {
+      const elem = document?.getElementById('main');
+      if (!!elem) {
+        elem.scrollTop = elem.scrollHeight;
+      }
+    }, 150);
   }
 
   onClick(): void {

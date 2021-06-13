@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
-import {delay, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 import {IPost, IUser} from '@shared/models';
-import {BehaviorSubject, Observable, of} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {TokenService} from '@core/_services/token.service';
 import {Socket} from 'ngx-socket-io';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, delay, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 
 const API_URL = environment.API_URL;
 
@@ -53,16 +53,21 @@ export class UserService {
   }
 
   setState(value: IUser): void {
-    console.log('set state: ' + value);
     this.currentUser$.next(value);
   }
 
   getCurrentUser(): Observable<IUser> {
-    return this.currentUser$.asObservable().pipe(distinctUntilChanged());
+    return this.currentUser$.asObservable().pipe(
+      distinctUntilChanged(),
+      catchError(error => {
+        console.log(error);
+        return of(initialState);
+      })
+    );
   }
 
   updateCurrentUser(): void {
-    this.getInfoUser(this.currentUser.username).subscribe(
+    this.getInfoUser(this.getCurrentUserInStorage().username).subscribe(
       (next: IUser) => {
         this.setState(next);
         // Next userSource
@@ -103,11 +108,15 @@ export class UserService {
   // Update newest user's Information from Server
   updateNewUser(username?: string): Observable<boolean | any> {
     if (!username) {
-      username = this.currentUser?.username;
+      username = this.getCurrentUserInStorage()?.username;
     }
     return this.getInfoUser(username).pipe(
       map(next => next),
-      switchMap(next => of(this.updateUserInLocal(next)))
+      switchMap(next => of(this.updateUserInLocal(next))),
+      catchError(error => {
+        console.log(error);
+        return of(false);
+      })
     );
   }
 
@@ -185,18 +194,27 @@ export class UserService {
   // Get Followers of an user
   getFollowers(payload: any): Observable<IUser[]> {
     const username = !!payload ? payload : this.currentUser.username;
-    return this.http.get<any>(API_URL + 'getDetailFollow/' + username).pipe(
+    return this.http.get<any>(API_URL + 'getDetailFollow/' + username, httpOptions).pipe(
       map(res => res.data.result[0].followers),
-      delay(50)
+      delay(50),
+      catchError(error => {
+        console.log(error);
+        return of([]);
+      })
     );
   }
 
   // Get Following of an user
   getFollowing(payload: string): Observable<IUser[]> {
-    const username = !!payload ? payload : this.currentUser.username;
-    return this.http.get<any>(API_URL + 'getDetailFollow/' + username).pipe(
+    let username: string;
+    username = !!payload ? payload : this.currentUser.username;
+    return this.http.get<any>(API_URL + 'getDetailFollow/' + username, httpOptions).pipe(
       map(res => res.data.result[0].following),
-      delay(50)
+      delay(50),
+      catchError(error => {
+        console.log(error);
+        return of([]);
+      })
     );
   }
 

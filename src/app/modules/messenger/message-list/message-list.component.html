@@ -13,14 +13,20 @@
 
     <!--Options-->
     <div class="options">
-      <button class="btn-delete" (click)="deleteConversation()">
-        <app-svg-icon [name]="'delete'"></app-svg-icon>
+      <button  [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <app-svg-icon [name]="'more'"></app-svg-icon>
       </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="deleteConversation()">
+          <mat-icon class="delete">delete</mat-icon>
+          <span>Delete this conversation</span>
+        </button>
+      </mat-menu>
     </div>
   </div>
 
   <!--  List messages in conversation-->
-  <div class="main">
+  <div class="main" id="main">
     <ng-container *ngFor="let message of messagesList">
       <div class="message-inline">
         <img *ngIf="message.senderId !== curUser._id"
@@ -59,4 +65,3 @@
     </div>
   </div>
 </div>
-

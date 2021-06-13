@@ -7,7 +7,8 @@ import {NewPostService} from '@features/post/new-post.service';
 @Component({
   selector: 'app-newsfeed',
   templateUrl: './newsfeed.component.html',
-  styleUrls: ['./newsfeed.component.scss']
+  styleUrls: ['./newsfeed.component.scss'],
+  providers: [UserService]
 })
 export class NewsfeedComponent implements OnInit {
   @ViewChild('newPostComponent') newPostComponent!: NewPostComponent;
@@ -25,10 +26,14 @@ export class NewsfeedComponent implements OnInit {
     private postSr: PostService,
     private newPost: NewPostService,
     private cdRef: ChangeDetectorRef) {
+    userSr.getCurrentUser().subscribe(
+      (res: IUser) => {
+        this.curUser = res;
+      }
+    );
   }
 
   ngOnInit(): void {
-    this.curUser = this.userSr.currentUser;
     this.getPosts();
   }
 
