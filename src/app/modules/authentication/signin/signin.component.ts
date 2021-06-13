@@ -65,13 +65,9 @@ export class SigninComponent implements OnInit {
         this.tokenService.saveToken(next.token);
         this.tokenService.saveUser(next.user);
 
-        // User Service
-        this.userSr.setState(next.user);
-
         // Auth Service
         this.authService.isAuth = true;
         this.router.navigate(['../']).then(_ => {
-          window.location.reload();
         });
 
         // Show notification
