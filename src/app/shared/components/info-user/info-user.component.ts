@@ -42,9 +42,7 @@ export class InfoUserComponent implements OnInit {
     private authSr: AuthService) {
     this.user$.subscribe(res => {
       this.curUser = res;
-      if (!this.isProfilePage) {
-        this.initialUser();
-      }
+      this.initialUser();
     });
   }
 
@@ -63,7 +61,9 @@ export class InfoUserComponent implements OnInit {
   }
 
   initialUser(): void {
-    this.thisUser = {...this.curUser};
+    if (!this.thisUser || this.thisUser.username === this.curUser.username) {
+      this.thisUser = {...this.curUser};
+    }
     this.username = this.thisUser?.username;
     this.postsOfUser = this.userSr.getPostsUser(this.thisUser?.username);
   }
