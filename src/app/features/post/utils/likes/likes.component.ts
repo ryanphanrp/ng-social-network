@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PostService, UserService} from '@core/_services';
 import {IUser} from '@shared/models';
-import {map} from 'rxjs/operators';
 import {DialogService} from '@features/dialog/dialog.service';
 
 @Component({
@@ -56,18 +55,10 @@ export class LikesComponent implements OnInit {
     Dialog view users like post
   */
   viewUsersLikePost(): void {
-    this.dialogSr.openInfoDialog('Likes', this.postSr.getUsersLikePost(this.postID)).pipe(
-      map((el: any) => {
-        if (el) {
-          this.userSr.updateNewUser();
-          return true;
-        }
-        return false;
-      })
-    ).subscribe(
-      (res: any) => {
+    this.dialogSr.openInfoDialog('Likes', this.postSr.getUsersLikePost(this.postID)).subscribe(
+      (res: boolean) => {
         if (res) {
-          this.ngOnInit();
+          this.userSr.updateCurrentUser();
         }
       }
     );
