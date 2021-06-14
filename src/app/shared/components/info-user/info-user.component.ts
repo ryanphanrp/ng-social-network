@@ -61,7 +61,7 @@ export class InfoUserComponent implements OnInit {
   }
 
   initialUser(): void {
-    if (!this.thisUser || this.thisUser.username === this.curUser.username) {
+    if (!this.thisUser || this.thisUser.username === this.curUser.username || !this.isProfilePage) {
       this.thisUser = {...this.curUser};
     }
     this.username = this.thisUser?.username;
