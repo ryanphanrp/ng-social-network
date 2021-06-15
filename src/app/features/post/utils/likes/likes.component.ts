@@ -6,11 +6,11 @@ import {DialogService} from '@features/dialog/dialog.service';
 @Component({
   selector: 'app-likes',
   templateUrl: './likes.component.html',
-  styleUrls: ['./likes.component.scss']
+  styleUrls: ['./likes.component.scss'],
 })
 export class LikesComponent implements OnInit {
   isLiked = false;
-  curUser: IUser = this.userSr.currentUser;
+  curUser!: IUser;
   @Input() postID = '';
   @Input() Likes: string[] = [];
 
@@ -19,6 +19,12 @@ export class LikesComponent implements OnInit {
     private userSr: UserService,
     private dialogSr: DialogService
   ) {
+    userSr.getCurrentUser().subscribe(
+      (res: IUser) => {
+        console.log('flag likes');
+        this.curUser = res;
+      }
+    );
   }
 
   ngOnInit(): void {

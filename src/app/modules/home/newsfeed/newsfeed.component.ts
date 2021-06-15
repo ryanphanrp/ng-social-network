@@ -7,8 +7,7 @@ import {NewPostService} from '@features/post/new-post.service';
 @Component({
   selector: 'app-newsfeed',
   templateUrl: './newsfeed.component.html',
-  styleUrls: ['./newsfeed.component.scss'],
-  providers: [UserService]
+  styleUrls: ['./newsfeed.component.scss']
 })
 export class NewsfeedComponent implements OnInit {
   @ViewChild('newPostComponent') newPostComponent!: NewPostComponent;
