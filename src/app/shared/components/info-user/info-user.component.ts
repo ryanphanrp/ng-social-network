@@ -21,8 +21,6 @@ export class InfoUserComponent implements OnInit {
   postsOfUser!: Observable<IPost[]>;
   @Input() showCounting = false;
 
-  user$ = this.userSr.getCurrentUser();
-
   // Config dimensions for avatar
   avatars = {
     home: {
@@ -40,8 +38,9 @@ export class InfoUserComponent implements OnInit {
     private userSr: UserService,
     private dialogSr: DialogService,
     private authSr: AuthService) {
-    this.user$.subscribe(res => {
+    userSr.getCurrentUser().subscribe(res => {
       this.curUser = res;
+      console.log('flag info');
       this.initialUser();
     });
   }
@@ -61,6 +60,9 @@ export class InfoUserComponent implements OnInit {
   }
 
   initialUser(): void {
+    console.log('flag init');
+    console.log(!this.isProfilePage);
+    console.log(!this.thisUser);
     if (!this.thisUser || this.thisUser.username === this.curUser.username || !this.isProfilePage) {
       this.thisUser = {...this.curUser};
     }

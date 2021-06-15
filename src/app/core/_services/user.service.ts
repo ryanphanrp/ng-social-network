@@ -67,6 +67,7 @@ export class UserService {
   }
 
   updateCurrentUser(): void {
+    console.log('update current user');
     this.getInfoUser(this.getCurrentUserInStorage().username).subscribe(
       (next: IUser) => {
         this.setState(next);
