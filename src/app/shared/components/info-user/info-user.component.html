@@ -6,7 +6,7 @@
   <div [ngStyle]="isProfilePage ? avatars.profile : avatars.home" class="avatar-block">
     <img alt="" class="avatar" src="{{ thisUser?.avatarUrl }}">
     <div *ngIf="thisUser?.isVerified && isProfilePage" class="status-overlay isVerified">
-      <app-svg-icon [name]="'verify'" [height]="32" [width]="32"></app-svg-icon>
+      <app-svg-icon [height]="32" [name]="'verify'" [width]="32"></app-svg-icon>
     </div>
   </div>
 
@@ -19,7 +19,7 @@
       </div>
       <!--      Verify-->
       <div *ngIf="thisUser?.isVerified && !isProfilePage" class="isVerified">
-        <app-svg-icon [name]="'verify'" [height]="24" [width]="24"></app-svg-icon>
+        <app-svg-icon [height]="24" [name]="'verify'" [width]="24"></app-svg-icon>
       </div>
     </div>
 
@@ -40,16 +40,12 @@
 <!--Function with Profile user-->
 <ng-container *ngIf="isProfilePage">
   <div class="function-block">
-    <ng-container *ngIf="isMe; then me else notMe"></ng-container>
-    <ng-template #me>
-      <button [routerLink]="['update']" class="btn btn-update-profile" matRipple>Update Profile</button>
-    </ng-template>
-    <ng-template #notMe>
-      <button (click)="isFollowed ? unfollowThisUser() : followThisUser()"
-              [ngClass]="isFollowed ? 'btn-unfollow': 'btn-follow'"
-              class="btn"
-              matRipple>{{ isFollowed ? 'Unfollow' : 'Follow' }}</button>
-    </ng-template>
+    <button *ngIf="isMe" [routerLink]="['update']" class="btn btn-update-profile" matRipple>Update Profile</button>
+
+    <button (click)="isFollowed ? unfollowThisUser() : followThisUser()" *ngIf="!isMe"
+            [ngClass]="isFollowed ? 'btn-unfollow': 'btn-follow'"
+            class="btn"
+            matRipple>{{ isFollowed ? 'Unfollow' : 'Follow' }}</button>
   </div>
 </ng-container>
 
@@ -57,7 +53,7 @@
 <div class="counting-post-container">
   <div class="counting-post">
     <div class="font-semibold text-lg text-center">Posts</div>
-    <div class="text-lg text-center">{{ (postsOfUser | async)?.length || 0 }}</div>
+    <div class="text-lg text-center">{{ (postsOfUser | async) || 0 }}</div>
   </div>
   <div (click)="getFollowers()" class="counting-post">
     <div class="font-semibold text-lg text-center">Followers</div>

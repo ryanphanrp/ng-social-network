@@ -7,10 +7,12 @@ import {MatRippleModule} from '@angular/material/core';
 import {BrandComponent, InfoUserComponent, NotFoundComponent, SvgIconComponent} from '@shared/components';
 import {ReducingContentDirective} from '@shared/directives';
 import {CountedLikesPipe, TimeAgoPipe, ToPartnerPipe} from '@shared/pipes';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 // Material Modules
 const materialModules = [
   MatDividerModule,
+  MatTooltipModule,
   MatRippleModule
 ];
 

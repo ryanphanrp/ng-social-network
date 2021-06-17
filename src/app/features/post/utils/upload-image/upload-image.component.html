@@ -13,7 +13,7 @@
   <!--  Menu Cropper-->
   <div class="menu-crop-image">
     <div class="menu-child">
-      <label for="input-file">
+      <label for="input-file"  matTooltip="Add more images">
         <app-svg-icon [name]="'inputFile'" [height]="40" [width]="40"></app-svg-icon>
       </label>
       <input (change)="fileChangeEvent($event)" hidden id="input-file" type="file"/>
@@ -22,37 +22,37 @@
     <div class="menu-child">
       <div class="child">
         <!--        Rotate Left-->
-        <button (click)="rotateLeft()" class="btn">
-          <app-svg-icon [name]="'rotateLeft'"></app-svg-icon>
+        <button (click)="rotateLeft()"  matTooltip="Rotate Left" class="btn">
+          <app-svg-icon [height]="20" [width]="20" [name]="'rotateLeft'"></app-svg-icon>
         </button>
         <!--        Rotate Right-->
-        <button (click)="rotateRight()" class="btn">
-          <app-svg-icon [name]="'rotateRight'"></app-svg-icon>
+        <button (click)="rotateRight()" matTooltip="Rotate Right" class="btn">
+          <app-svg-icon [height]="20" [width]="20" [name]="'rotateRight'"></app-svg-icon>
         </button>
       </div>
       <div class="child">
         <!--        Flip Vertical-->
-        <button (click)="flipVertical()" class="btn">
-          <app-svg-icon [name]="'flipVer'"></app-svg-icon>
+        <button (click)="flipVertical()" matTooltip="Flip Vertical" class="btn">
+          <app-svg-icon [height]="20" [width]="20" [name]="'flipVer'"></app-svg-icon>
         </button>
         <!--        Flip Horizontal-->
-        <button (click)="flipHorizontal()" class="btn">
-          <app-svg-icon [name]="'flipHor'"></app-svg-icon>
+        <button (click)="flipHorizontal()" matTooltip="Flip Horizontal" class="btn">
+          <app-svg-icon [height]="20" [width]="20" [name]="'flipHor'"></app-svg-icon>
         </button>
       </div>
     </div>
 
     <div class="menu-child">
       <div class="child">
-        <button (click)="zoomOut()" class="btn">
-          <app-svg-icon [name]="'zoomOut'"></app-svg-icon>
+        <button (click)="zoomOut()" matTooltip="Zoom Out" class="btn">
+          <app-svg-icon [height]="20" [width]="20" [name]="'zoomOut'"></app-svg-icon>
         </button>
-        <button (click)="zoomIn()" class="btn">
-          <app-svg-icon [name]="'zoomIn'"></app-svg-icon>
+        <button (click)="zoomIn()" matTooltip="Zoom In" class="btn">
+          <app-svg-icon [height]="20" [width]="20" [name]="'zoomIn'"></app-svg-icon>
         </button>
       </div>
       <div class="child">
-        <input class="border-2" (keyup)="updateRotation()" [(ngModel)]="rotation" placeholder="Rotation" type="number"/>
+        <input class="update-rotate" matTooltip="Enter angle rotate" (keyup)="updateRotation()" [(ngModel)]="rotation" placeholder="Rotation" type="number"/>
       </div>
     </div>
 
@@ -66,8 +66,11 @@
           <option [value]="1">1:1</option>
           <option [value]="4/3">4:3</option>
         </select>
-        <button (click)="resetImage()">
-          <app-svg-icon [name]="'reset'"></app-svg-icon>
+        <button (click)="resetImage()" matTooltip="Reset image">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 12.5C0 5.59754 5.59754 0 12.5 0C19.4024 0 25 5.59754 25 12.5C25 19.4024 19.4024 25 12.5 25C5.59754 25 0 19.4024 0 12.5Z" fill="#357180"/>
+            <path d="M20.1935 8.545C20.0676 8.29812 19.4529 7.73887 18.415 8.24775C17.3771 8.75662 17.8809 9.87512 17.8809 9.87512C18.2689 10.6661 18.4856 11.5579 18.4856 12.495C18.4856 15.8001 15.8052 18.4805 12.5001 18.4805C9.19494 18.4805 6.51456 15.8001 6.51456 12.495C6.51456 9.4015 8.86237 6.85719 11.8753 6.53975V8.09156C11.8753 8.09156 11.8702 8.18225 11.966 8.24269C12.0617 8.30312 12.1574 8.24269 12.1574 8.24269L17.1252 5.31545C17.1252 5.31545 17.2361 5.25499 17.2361 5.14414C17.2361 5.04842 17.1252 4.98292 17.1252 4.98292L12.1776 2.07079C12.1776 2.07079 12.0667 1.99018 11.966 2.03048C11.8652 2.07079 11.8803 2.20682 11.8803 2.20682V3.86946C7.39625 4.19191 3.85938 7.93031 3.85938 12.495C3.85938 17.2713 7.73381 21.1457 12.5101 21.1457C17.2864 21.1457 21.1609 17.2713 21.1609 12.495C21.1508 11.0742 20.8031 9.729 20.1935 8.545Z" fill="#F7F7F7"/>
+          </svg>
         </button>
       </div>
     </div>

@@ -13,6 +13,7 @@ export class LikesComponent implements OnInit {
   curUser!: IUser;
   @Input() postID = '';
   @Input() Likes: string[] = [];
+  @Input() detailPost = false;
 
   constructor(
     private postSr: PostService,
