@@ -43,6 +43,7 @@ export class InfoUserComponent implements OnInit {
       this.curUser = res;
       console.log('flag info');
       this.initialUser();
+      this.updateThisUser();
     });
   }
 
@@ -54,21 +55,35 @@ export class InfoUserComponent implements OnInit {
       this.thisUser = {...this.curUser};
       this.cdRef.markForCheck();
     } else if (!!user && (user.username !== this.thisUser.username)) {
-      console.log('Difference User from current user.');
-      this.thisUser = user;
-      this.isMe = false;
-      this.postsOfUser = this.userSr.getNumberPostsUser(this.thisUser?.username);
-      this.isFollowed = this.thisUser?.followers?.includes(this.curUser?._id) as boolean;
+      this.initialThisUser(user);
     }
   }
 
   ngOnInit(): void {
   }
 
+  updateThisUser(): void {
+    if (!!this.thisUser.username && (this.thisUser.username !== this.curUser.username)) {
+      console.log('hahaha');
+      this.userSr.getInfoUser(this.thisUser.username).subscribe(
+        (res: IUser) => {
+          this.initialThisUser(res);
+        }
+      );
+    }
+  }
+
+  initialThisUser(user: IUser): void {
+    console.log('Difference User from current user.');
+    this.thisUser = user;
+    this.isMe = false;
+    this.postsOfUser = this.userSr.getNumberPostsUser(this.thisUser?.username);
+    this.isFollowed = this.thisUser?.followers?.includes(this.curUser?._id) as boolean;
+    this.cdRef.markForCheck();
+  }
+
   initialUser(): void {
     console.log('flag init');
-    console.log(!this.isProfilePage);
-    console.log(!this.thisUser);
     if (!this.thisUser || this.thisUser.username === this.curUser.username || !this.isProfilePage) {
       this.thisUser = {...this.curUser};
     }
