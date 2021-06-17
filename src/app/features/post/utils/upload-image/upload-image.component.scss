@@ -7,7 +7,7 @@
 .menu-crop-image {
   height: 13%;
   @apply flex justify-center items-center;
-  @apply w-full;
+  @apply w-full p-2;
 
   .menu-child {
     @apply flex flex-col justify-center items-center;
@@ -18,7 +18,7 @@
       @apply flex justify-around items-center;
 
       .toggle {
-        @apply px-2 py-1 rounded-3xl border border-blue-500 text-blue-700;
+        @apply px-1 rounded-xl border border-blue-500 text-blue-700;
         @apply focus:bg-blue-500 focus:text-white;
       }
 
@@ -28,10 +28,11 @@
         @apply transform hover:scale-105;
       }
 
-      input{
+      input {
+        @apply border-2;
         width: 100%;
         padding: 2px 2px 2px 10px;
-        font-size: 20px;
+        font-size: 16px;
         border-radius: 15px;
       }
 

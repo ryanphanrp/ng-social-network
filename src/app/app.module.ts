@@ -21,6 +21,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MessengerService, UserService} from '@core/_services';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const materialModules = [
   MatSidenavModule,
@@ -28,7 +29,8 @@ const materialModules = [
   MatGridListModule,
   MatDialogModule,
   MatChipsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTooltipModule
 ];
 
 const configSocket: SocketIoConfig = {url: environment.API_URL, options: {}};

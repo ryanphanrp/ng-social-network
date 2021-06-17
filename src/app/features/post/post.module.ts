@@ -30,7 +30,8 @@ const materialModules = [
   MatButtonModule,
   MatDialogModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTooltipModule
 ];
 
 const utilComponents = [
@@ -56,8 +57,7 @@ const utilComponents = [
         RouterModule,
         ImageCropperModule,
         FormsModule,
-        materialModules,
-        MatTooltipModule
+        materialModules
     ],
   exports: [
     CardPostComponent,

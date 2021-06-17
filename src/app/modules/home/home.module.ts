@@ -18,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { ViewPostComponent } from './view-post/view-post.component';
 import {PostModule} from '@features/post/post.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 // Material Modules
@@ -28,7 +29,8 @@ const materialModules = [
   MatMenuModule,
   MatButtonModule,
   MatAutocompleteModule,
-  MatInputModule
+  MatInputModule,
+  MatTooltipModule
 ];
 
 @NgModule({

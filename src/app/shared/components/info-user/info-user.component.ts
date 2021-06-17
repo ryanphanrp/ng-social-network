@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {IPost, IUser} from '@shared/models';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {IUser} from '@shared/models';
 import {UserService} from '@core/_services/user.service';
 import {AuthService} from '@core/_services/auth.service';
 import {Router} from '@angular/router';
@@ -18,7 +18,7 @@ export class InfoUserComponent implements OnInit {
   username = '';
   thisUser!: IUser;
   isProfilePage = false;
-  postsOfUser!: Observable<IPost[]>;
+  postsOfUser!: Observable<number>;
   @Input() showCounting = false;
 
   // Config dimensions for avatar
@@ -37,6 +37,7 @@ export class InfoUserComponent implements OnInit {
     private router: Router,
     private userSr: UserService,
     private dialogSr: DialogService,
+    private cdRef: ChangeDetectorRef,
     private authSr: AuthService) {
     userSr.getCurrentUser().subscribe(res => {
       this.curUser = res;
@@ -47,11 +48,16 @@ export class InfoUserComponent implements OnInit {
 
   @Input() set profileUser(user: IUser) {
     this.isProfilePage = true;
-    if (!!user && (user.username !== this.thisUser.username)) {
+    if (user.username === this.curUser.username) {
+      this.isMe = true;
+      console.log(this.isMe);
+      this.thisUser = {...this.curUser};
+      this.cdRef.markForCheck();
+    } else if (!!user && (user.username !== this.thisUser.username)) {
       console.log('Difference User from current user.');
       this.thisUser = user;
       this.isMe = false;
-      this.postsOfUser = this.userSr.getPostsUser(this.thisUser?.username);
+      this.postsOfUser = this.userSr.getNumberPostsUser(this.thisUser?.username);
       this.isFollowed = this.thisUser?.followers?.includes(this.curUser?._id) as boolean;
     }
   }
@@ -67,7 +73,7 @@ export class InfoUserComponent implements OnInit {
       this.thisUser = {...this.curUser};
     }
     this.username = this.thisUser?.username;
-    this.postsOfUser = this.userSr.getPostsUser(this.thisUser?.username);
+    this.postsOfUser = this.userSr.getNumberPostsUser(this.thisUser?.username);
   }
 
   /* Navigate */

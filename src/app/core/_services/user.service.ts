@@ -154,6 +154,13 @@ export class UserService {
     );
   }
 
+  // Get user's posts by username
+  getNumberPostsUser(username: string): Observable<number> {
+    return this.http.get<any>(API_URL + 'users/' + username, httpOptions).pipe(
+      map((ele: any) => ele.data?.posts.length)
+    );
+  }
+
   // Change password
   changePassword(payload: any): Observable<any> {
     return this.http.post(API_URL + 'settings/password', {
