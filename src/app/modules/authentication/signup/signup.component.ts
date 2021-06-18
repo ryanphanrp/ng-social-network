@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService, TokenService} from '@core/_services';
 import {DialogService} from '@features/dialog/dialog.service';
 import {MustMatch} from '@core/_helpers/must-match.validator';
+import {environment} from '../../../../environments/environment';
 
 const PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).*$/;
 const USERNAME_PATTERN = /^[a-zA-Z0-9_-]{3,20}$/;
@@ -17,6 +18,7 @@ export class SignupComponent implements OnInit {
   signUpForm!: FormGroup;
   message = '';
   passwordShow = false;
+  brand = environment.brand;
 
 
   constructor(private authService: AuthService,

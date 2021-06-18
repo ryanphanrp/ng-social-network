@@ -8,6 +8,7 @@ import {DialogService} from '@features/dialog/dialog.service';
 import {AuthService} from '@core/_services/auth.service';
 import {TokenService} from '@core/_services/token.service';
 import {UserService} from '@core/_services';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-signin',
@@ -20,6 +21,7 @@ export class SigninComponent implements OnInit {
   message = '';
   passwordShow = false;
   PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).*$/;
+  brand = environment.brand;
 
   constructor(private authService: AuthService,
               private userSr: UserService,

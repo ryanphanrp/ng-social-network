@@ -4,7 +4,7 @@
     <!--      Brand Name-->
     <div class="brand">
       <img alt="" src="./assets/brand.svg"/>
-      <div class="brand-name">Instagram</div>
+      <div class="brand-name">{{ title }}</div>
     </div>
 
     <!--      Navigation-->
@@ -25,9 +25,21 @@
       </div>
 
       <!--        Profile-->
-      <div class="profile-block" [routerLink]="['profile', curUser?.username]">
+      <div class="profile-block" [matMenuTriggerFor]="menu" [routerLink]="['profile', curUser?.username]">
         <img alt="" class="avatar" src="{{ curUser?.avatarUrl }}">
       </div>
+
+      <!--  Material Menu Dropdown-->
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="updateProfile()">
+          <img class="mr-4" src="https://img.icons8.com/material/24/000000/admin-settings-male.png" alt=""/>
+          <span>Profile Setting</span>
+        </button>
+        <button class="logout-btn" (click)="logOut()" mat-menu-item>
+          <mat-icon aria-hidden="false" aria-label="Logout icon">logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
     </div>
   </div>
 
