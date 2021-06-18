@@ -29,6 +29,11 @@
       @include alignVertical;
       @apply my-4;
 
+      img {
+        height: $sizeLogo;
+        width: $sizeLogo;
+      }
+
       .title-form {
         @apply text-2xl mt-4 font-semibold tracking-wider;
       }

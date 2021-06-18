@@ -22,6 +22,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MessengerService, UserService} from '@core/_services';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 const materialModules = [
   MatSidenavModule,
@@ -47,7 +49,9 @@ const configSocket: SocketIoConfig = {url: environment.API_URL, options: {}};
     SocketIoModule.forRoot(configSocket),
     BrowserAnimationsModule,
     materialModules,
-    SharedModule
+    SharedModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [authInterceptorProviders, MessengerService, UserService],
   bootstrap: [AppComponent]
