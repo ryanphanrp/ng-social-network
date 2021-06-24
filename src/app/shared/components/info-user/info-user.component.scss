@@ -98,6 +98,10 @@
       @apply border-green-500 text-green-500;
     }
 
+    &-message {
+      @apply mt-2 border-blue-500 bg-blue-500 text-white;
+    }
+
     &-update-profile {
       @apply border-gray-500 text-gray-500 bg-white;
     }

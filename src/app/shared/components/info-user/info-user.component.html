@@ -46,6 +46,8 @@
             [ngClass]="isFollowed ? 'btn-unfollow': 'btn-follow'"
             class="btn"
             matRipple>{{ isFollowed ? 'Unfollow' : 'Follow' }}</button>
+
+    <button *ngIf="!isMe && isFollowed" (click)="messengerSr.joinConversation(thisUser._id)" class="btn btn-message" matRipple>Message</button>
   </div>
 </ng-container>
 
