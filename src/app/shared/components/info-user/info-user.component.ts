@@ -5,6 +5,7 @@ import {AuthService} from '@core/_services/auth.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {DialogService} from '@features/dialog/dialog.service';
+import {MessengerService} from '@core/_services';
 
 @Component({
   selector: 'app-info-user',
@@ -37,6 +38,7 @@ export class InfoUserComponent implements OnInit {
     private router: Router,
     private userSr: UserService,
     private dialogSr: DialogService,
+    public messengerSr: MessengerService,
     private cdRef: ChangeDetectorRef,
     private authSr: AuthService) {
     userSr.getCurrentUser().subscribe(res => {

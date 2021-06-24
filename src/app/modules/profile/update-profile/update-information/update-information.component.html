@@ -27,37 +27,43 @@
       <!-- Name -->
       <div class="form-field">
         <label for="name-input">Name</label>
-        <input class="input-field" formControlName="name"
-               id="name-input" name="" placeholder="{{ curUser?.name }}"
-               type="text">
-        <div
-          *ngIf="infoForm.controls['name'].invalid && (infoForm.controls['name'].dirty || infoForm.controls['name'].touched)"
-          class="alert">
-          <div *ngIf="infoForm.controls['name'].errors?.required">
-            Name is required.
-          </div>
-          <div *ngIf="infoForm.controls['name'].errors?.maxlength">
-            Username must have max 30 characters.
+        <div class="text-area-field">
+          <input class="input-field" formControlName="name"
+                 id="name-input" name="" placeholder="{{ curUser?.name }}"
+                 type="text">
+          <div
+            *ngIf="infoForm.controls['name'].invalid && (infoForm.controls['name'].dirty || infoForm.controls['name'].touched)"
+            class="alert">
+            <div *ngIf="infoForm.controls['name'].errors?.required">
+              Name is required.
+            </div>
+            <div *ngIf="infoForm.controls['name'].errors?.maxlength">
+              Username must have max 30 characters.
+            </div>
           </div>
         </div>
+
       </div>
 
       <!-- Username -->
       <div class="form-field">
         <label for="username-input">Username</label>
-        <input class="input-field" formControlName="username"
-               id="username-input" name="" placeholder="{{ curUser?.username }}"
-               type="text">
-        <div
-          *ngIf="infoForm.controls['username'].invalid && (infoForm.controls['username'].dirty || infoForm.controls['username'].touched)"
-          class="alert">
-          <div *ngIf="infoForm.controls['username'].errors?.required">
-            Username is required.
-          </div>
-          <div *ngIf="infoForm.controls['username'].errors?.pattern">
-            Please enter unicode characters and between 3 and 20 characters length!
+        <div class="text-area-field">
+          <input class="input-field" formControlName="username"
+                 id="username-input" name="" placeholder="{{ curUser?.username }}"
+                 type="text">
+          <div
+            *ngIf="infoForm.controls['username'].invalid && (infoForm.controls['username'].dirty || infoForm.controls['username'].touched)"
+            class="alert">
+            <div *ngIf="infoForm.controls['username'].errors?.required">
+              Username is required.
+            </div>
+            <div *ngIf="infoForm.controls['username'].errors?.pattern">
+              Please enter unicode characters and between 3 and 20 characters length!
+            </div>
           </div>
         </div>
+
       </div>
 
       <!-- Email -->

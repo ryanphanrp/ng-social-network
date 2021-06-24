@@ -77,8 +77,13 @@
         @apply flex items-center;
         @apply w-full my-2;
         @include validationFormField;
+
         label {
           @apply mr-4;
+        }
+
+        .text-area-field {
+          @apply w-full;
         }
       }
 
