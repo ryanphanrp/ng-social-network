@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {PostService, UserService} from '@core/_services';
 import {IUser} from '@shared/models';
 import {DialogService} from '@features/dialog/dialog.service';
@@ -18,7 +18,8 @@ export class LikesComponent implements OnInit {
   constructor(
     private postSr: PostService,
     private userSr: UserService,
-    private dialogSr: DialogService
+    private dialogSr: DialogService,
+    private cdRef: ChangeDetectorRef
   ) {
     userSr.getCurrentUser().subscribe(
       (res: IUser) => {
@@ -40,6 +41,7 @@ export class LikesComponent implements OnInit {
     this.postSr.likePost(this.postID).subscribe(
       (_: any) => {
         this.Likes.push(this.curUser._id);
+        this.cdRef.markForCheck();
       }
     );
   }
@@ -49,6 +51,7 @@ export class LikesComponent implements OnInit {
     this.postSr.unlikePost(this.postID).subscribe(
       (_: any) => {
         this.Likes = this.Likes.filter(ele => ele !== this.curUser?._id);
+        this.cdRef.markForCheck();
       }
     );
   }
