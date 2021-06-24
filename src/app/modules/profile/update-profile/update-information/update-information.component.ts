@@ -44,6 +44,7 @@ export class UpdateInformationComponent implements OnInit {
       email: this.curUser?.email,
       bio: this.curUser?.bio
     });
+    this.infoForm.controls.email.disable();
   }
 
   // Open Update Avatar Dialog
@@ -67,7 +68,7 @@ export class UpdateInformationComponent implements OnInit {
     const payload = {
       name: this.infoForm.value?.name,
       username: this.infoForm.value?.username,
-      email: this.infoForm.value?.email,
+      email: this.curUser?.email,
       bio: this.infoForm.value?.bio,
       avatarUrl: this.curUser?.avatarUrl
     };
