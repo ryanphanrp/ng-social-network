@@ -83,4 +83,19 @@ export class DetailPostComponent implements OnInit {
     );
   }
 
+  openEditPost(): void {
+    this.dialogRef.close();
+    this.newPost.openEditPostDialog(this.data._id).subscribe(
+      (res: any) => {
+        if (res) {
+          this.postSr.getSinglePost(this.data._id).subscribe(
+            (data: IPost) => {
+              this.data = data;
+            }
+          );
+        }
+      }
+    );
+  }
+
 }

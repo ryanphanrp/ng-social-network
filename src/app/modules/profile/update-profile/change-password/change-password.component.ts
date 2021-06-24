@@ -13,7 +13,7 @@ const PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
-  curUser: IUser = this.userSr.currentUser;
+  curUser!: IUser;
   pwForm!: FormGroup;
   isShow = false;
   show = {
@@ -26,6 +26,11 @@ export class ChangePasswordComponent implements OnInit {
     private authSr: AuthService,
     private dialogSr: DialogService,
     private fb: FormBuilder) {
+    this.userSr.getCurrentUser().subscribe(
+      (res: IUser) => {
+        this.curUser = res;
+      }
+    );
   }
 
   ngOnInit(): void {

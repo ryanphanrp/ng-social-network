@@ -26,6 +26,12 @@
             <mat-icon>outlined_flag</mat-icon>
             <span>Report</span>
           </button>
+          <button (click)="openEditPost()"
+                  *ngIf="curUser._id === data.postedBy._id"
+                  mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Edit this post</span>
+          </button>
           <button
             (click)="deleteThisPost()"
             *ngIf="curUser._id === data.postedBy._id"

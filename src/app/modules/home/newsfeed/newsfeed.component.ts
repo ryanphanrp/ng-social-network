@@ -28,12 +28,12 @@ export class NewsfeedComponent implements OnInit {
     userSr.getCurrentUser().subscribe(
       (res: IUser) => {
         this.curUser = res;
+        this.getPosts();
       }
     );
   }
 
   ngOnInit(): void {
-    this.getPosts();
   }
 
   /*
