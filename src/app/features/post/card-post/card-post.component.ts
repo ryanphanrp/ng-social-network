@@ -12,7 +12,7 @@ import {NewPostService} from '@features/post/new-post.service';
 })
 export class CardPostComponent implements OnInit {
   data!: IPost;
-  curUser: IUser = this.userSr.currentUser;
+  curUser!: IUser;
   isLiked = false;
   @Output() isDeleted = new EventEmitter<string>();
   @Output() isEdit = new EventEmitter<string>();
@@ -26,6 +26,7 @@ export class CardPostComponent implements OnInit {
     public newPost: NewPostService,
     private cdRef: ChangeDetectorRef
   ) {
+    userSr.getCurrentUser().subscribe((res: IUser) => this.curUser = res);
   }
 
   @Input() set setData(value: any) {
