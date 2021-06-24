@@ -20,6 +20,7 @@ export class UploadImageComponent implements OnInit {
   isShowUpload = false;
   ratio = 4 / 3;
   disableRatio = false;
+  editImg: any = '';
 
   /* Images from input */
   imagesFromInput: string[] = [];
@@ -37,7 +38,6 @@ export class UploadImageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   initImages(): void {
@@ -94,9 +94,9 @@ export class UploadImageComponent implements OnInit {
     };
   }
 
-  handleChangeRatio(event: any): void {
+  /*handleChangeRatio(event: any): void {
     console.log(event);
-  }
+  }*/
 
   // Flip Image
   flipHorizontal(): void {
@@ -202,8 +202,8 @@ export class UploadImageComponent implements OnInit {
 
   // Crop this image
   editThisImage(value: string): void {
-    console.log(value);
-    this.croppedImage = value;
+    this.deleteThisImage(value);
+    this.editImg = value;
     this.cdRef.markForCheck();
   }
 
