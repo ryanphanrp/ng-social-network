@@ -65,12 +65,19 @@ export class NewsfeedComponent implements OnInit {
   * */
   getPosts(): void {
     this.postSr.getAllPost().subscribe(
-      (res: IPost[]) => this.posts = res
+      (res: IPost[]) => {
+        this.posts = res;
+        this.cdRef.markForCheck();
+      }
     );
+    console.log(this.posts);
   }
 
   getSubPost(): void {
-    this.postSr.getSubPost().subscribe((res: IPost[]) => this.posts = res);
+    this.postSr.getSubPost().subscribe((res: IPost[]) => {
+      this.posts = res;
+      this.cdRef.markForCheck();
+    });
   }
 
   /*

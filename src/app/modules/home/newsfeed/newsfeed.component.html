@@ -20,7 +20,7 @@
     </div>
 
     <!--    List Post on New feeds-->
-    <div class="main-panel">
+    <div class="main-panel" *ngIf="!!posts.length">
       <div (scrolled)="onScroll()"
            [infiniteScrollDistance]="distance"
            [infiniteScrollThrottle]="throttle"
