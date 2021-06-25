@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {IPost} from '@shared/models';
 import {map, switchMap} from 'rxjs/operators';
@@ -13,15 +13,30 @@ import {PostService} from '@core/_services';
 export class ViewPostComponent implements OnInit {
 
   post$!: Observable<IPost>;
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private postSr: PostService) { }
+    private router: Router,
+    private postSr: PostService) {
+
+  }
 
   ngOnInit(): void {
     this.post$ = this.activatedRoute.paramMap.pipe(
       map(para => para.get('ID') as string),
       switchMap((ID: string) => this.postSr.getSinglePost(ID))
     ) as Observable<IPost>;
+  }
+
+  handleDelete(event: any): void {
+    if (!!event) {
+      this.postSr.deletePost(event).subscribe(
+        res => {
+          this.router.navigate(['.']).then(_ => {
+          });
+        }
+      );
+    }
   }
 
 }
