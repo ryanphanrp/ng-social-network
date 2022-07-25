@@ -12,19 +12,19 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Screenshots
 * Login
-![Alt text](./screenshot/login.png)
+![Alt text](./screenshots/login.png)
 
 * Newsfeed with all post from friends
-![Alt text](./screenshot/newsfeed.png)
+![Alt text](./screenshots/newsfeed.png)
 
 * Create a new media post
-![Alt text](./screenshot/create-post.png)
+![Alt text](./screenshots/create-post.png)
 
 * User's Profile
-![Alt text](./screenshot/profile.png)
+![Alt text](./screenshots/profile.png)
 
 * Upload Or change user's avatar
-![Alt text](./screenshot/upload-avatar.png)
+![Alt text](./screenshots/upload-avatar.png)
 
 * Messenger, chat with friends
-![Alt text](./screenshot/chat.png)
+![Alt text](./screenshots/chat.png)
