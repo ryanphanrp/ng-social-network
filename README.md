@@ -1,5 +1,7 @@
-# SocialNetwork
+![Bản sao của OAuth Starter](https://user-images.githubusercontent.com/51282340/232516846-f76453c7-0214-450e-ae1c-4ecfe6aac59d.png)
 
+## Description
+We built a social network like Instagram for final project on school.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
 
 ## Development server
